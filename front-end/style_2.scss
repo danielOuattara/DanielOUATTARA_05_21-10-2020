@@ -1,0 +1,63 @@
+@font-face {
+    font-family: belligerent;
+    src: url(./belligerent.ttf);
+}
+
+header {
+    border: 1px solid black;
+}
+
+
+footer {
+    border: 1px solid black;
+}
+
+h1 {
+    color: #2a1e26;
+    // font-size: 8vw!important;
+}
+
+.logo-text {
+    font-family: belligerent;
+}
+
+a#head-anchor {
+    text-decoration: none;
+}
+
+.block-titre {
+    background: #ede0e6 !important;
+}
+
+img#head-logo {
+    max-width: 100%!important;
+}
+
+
+a#head-panier {
+    text-decoration: none;
+ 
+}
+
+.fa-shopping-basket {
+    font-size: 24px;
+}
+
+// @media  screen and (min-width: 568px) and (max-width: 1200px) {
+//     h1 {
+//         font-size: 8vw!important;
+//     }
+// }
+
+
+
+span.orinoco-form-contact {
+
+    font-family: belligerent;
+    font-size: 32px;
+}
+
+
+#footer-logo {
+    max-width: 80px;
+}
