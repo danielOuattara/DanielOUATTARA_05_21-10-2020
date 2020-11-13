@@ -5,6 +5,10 @@
 
 header {
     background: #ede0e6;
+
+    img.brand-logo {
+        width: 40px;
+    }
 }
 
 main {
@@ -37,14 +41,11 @@ a#head-anchor {
     background: #ede0e6 !important;
 }
 
-// img#head-logo {
-//     max-width: 100%!important;
-// }
+
 
 
 a#head-panier {
     text-decoration: none;
- 
 }
 
 .fa-shopping-basket {
