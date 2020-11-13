@@ -4,15 +4,20 @@
 }
 
 header {
-  border: 1px solid black;
+  background: #ede0e6;
 }
 
-footer {
-  border: 1px solid black;
+main {
+  padding: 500px 50px;
+}
+
+footer img {
+  width: 60px;
 }
 
 h1 {
   color: #2a1e26;
+  font-size: 8vw !important;
 }
 
 .logo-text {
@@ -25,10 +30,6 @@ a#head-anchor {
 
 .block-titre {
   background: #ede0e6 !important;
-}
-
-img#head-logo {
-  max-width: 100% !important;
 }
 
 a#head-panier {

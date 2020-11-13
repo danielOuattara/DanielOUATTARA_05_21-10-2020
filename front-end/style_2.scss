@@ -4,17 +4,25 @@
 }
 
 header {
-    border: 1px solid black;
+    background: #ede0e6;
+}
+
+main {
+    padding: 500px 50px;
+}
+
+footer{
+    // padding: 0px 0;
+    img {
+        width: 60px;
+    }
 }
 
 
-footer {
-    border: 1px solid black;
-}
 
 h1 {
     color: #2a1e26;
-    // font-size: 8vw!important;
+    font-size: 8vw!important;
 }
 
 .logo-text {
@@ -29,9 +37,9 @@ a#head-anchor {
     background: #ede0e6 !important;
 }
 
-img#head-logo {
-    max-width: 100%!important;
-}
+// img#head-logo {
+//     max-width: 100%!important;
+// }
 
 
 a#head-panier {
