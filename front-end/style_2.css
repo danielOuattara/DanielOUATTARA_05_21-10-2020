@@ -7,37 +7,29 @@ header {
   background: #ede0e6;
 }
 
-header img.brand-logo {
-  width: 40px;
+header nav .image-top-logo {
+  width: 35px;
 }
 
-main {
-  padding: 500px 50px;
+header h1 {
+  color: #2a1e26;
+  font-family: belligerent, "sans serif";
+}
+
+header h1 .image-logo {
+  width: 100px;
+}
+
+header .image-modal {
+  width: 45px;
 }
 
 footer img {
   width: 60px;
 }
 
-h1 {
-  color: #2a1e26;
-  font-size: 8vw !important;
-}
-
-.logo-text {
-  font-family: belligerent;
-}
-
-a#head-anchor {
-  text-decoration: none;
-}
-
 .block-titre {
   background: #ede0e6 !important;
-}
-
-a#head-panier {
-  text-decoration: none;
 }
 
 .fa-shopping-basket {
@@ -47,8 +39,4 @@ a#head-panier {
 span.orinoco-form-contact {
   font-family: belligerent;
   font-size: 32px;
-}
-
-#footer-logo {
-  max-width: 80px;
 }

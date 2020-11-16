@@ -3,16 +3,34 @@
     src: url(./belligerent.ttf);
 }
 
+$logo-font: belligerent, "sans serif";
+
+
+
 header {
     background: #ede0e6;
 
-    img.brand-logo {
-        width: 40px;
+   nav .image-top-logo{
+        width: 35px;
     }
+
+    h1 {
+        color: #2a1e26;
+        font-family: $logo-font;
+    }
+    
+    h1 .image-logo {
+     width: 100px;
+    }
+
+    .image-modal {
+        width: 45px;
+    }
+
 }
 
 main {
-    padding: 500px 50px;
+    
 }
 
 footer{
@@ -24,29 +42,13 @@ footer{
 
 
 
-h1 {
-    color: #2a1e26;
-    font-size: 8vw!important;
-}
 
-.logo-text {
-    font-family: belligerent;
-}
 
-a#head-anchor {
-    text-decoration: none;
-}
 
 .block-titre {
     background: #ede0e6 !important;
 }
 
-
-
-
-a#head-panier {
-    text-decoration: none;
-}
 
 .fa-shopping-basket {
     font-size: 24px;
@@ -67,6 +69,6 @@ span.orinoco-form-contact {
 }
 
 
-#footer-logo {
-    max-width: 80px;
-}
+// #footer-logo {
+//     max-width: 80px;
+// }
