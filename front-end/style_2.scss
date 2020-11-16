@@ -10,7 +10,7 @@ $logo-font: belligerent, "sans serif";
 header {
     background: #ede0e6;
 
-   nav .image-top-logo{
+   .image-top-logo{
         width: 35px;
     }
 
@@ -27,6 +27,10 @@ header {
         width: 45px;
     }
 
+    .bloc-titre {
+        background: #ede0e6 !important;
+    }
+
 }
 
 main {
@@ -34,41 +38,7 @@ main {
 }
 
 footer{
-    // padding: 0px 0;
     img {
         width: 60px;
     }
 }
-
-
-
-
-
-
-.block-titre {
-    background: #ede0e6 !important;
-}
-
-
-.fa-shopping-basket {
-    font-size: 24px;
-}
-
-// @media  screen and (min-width: 568px) and (max-width: 1200px) {
-//     h1 {
-//         font-size: 8vw!important;
-//     }
-// }
-
-
-
-span.orinoco-form-contact {
-
-    font-family: belligerent;
-    font-size: 32px;
-}
-
-
-// #footer-logo {
-//     max-width: 80px;
-// }

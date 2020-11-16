@@ -7,7 +7,7 @@ header {
   background: #ede0e6;
 }
 
-header nav .image-top-logo {
+header .image-top-logo {
   width: 35px;
 }
 
@@ -24,19 +24,10 @@ header .image-modal {
   width: 45px;
 }
 
-footer img {
-  width: 60px;
-}
-
-.block-titre {
+header .bloc-titre {
   background: #ede0e6 !important;
 }
 
-.fa-shopping-basket {
-  font-size: 24px;
-}
-
-span.orinoco-form-contact {
-  font-family: belligerent;
-  font-size: 32px;
+footer img {
+  width: 60px;
 }
