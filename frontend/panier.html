@@ -2,18 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Orinoco e-commerce</title>
+    <title>Panier OriCamera </title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <meta name="robots" content="index, follow, max-snippet: -1, max-image-preview:large, max-video-preview: -1" />
-	<meta name="google-site-verification" content="#" />
-    <meta name="yandex-verification" content="#" />
-    <meta name="description" content="Découvrez nos applications de vente conçus pour repondre rapidement à vos attentes. Nous sommes spécialisés dans la vente de produits specifiques. 
-                                      Découvrez  également Oribook pour les livres et Oritextil pour les vêtements."/>
-    <meta name="keywords" content="seo, google, site e-commerce, comerce en ligne, boutique en ligne,  e-commerce thématique, e-commerce spécialisé, e-commerce français, boutique en ligne France, produit en France"/>
-
 
     <link rel="stylesheet" href="./style_2.css">
     <link rel="shortcut icon" type="image/x-icon" href="./images/favicon.png" />
@@ -36,7 +28,10 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#head-navbar" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <a class="navbar-brand" href="./panier.html"><img class="image-top-logo" src="./images/caddy.png" alt="Orinoco logo e-commerce spécialisé"/><span class="contenu-panier">(vide)</span></a></a>
+                <a class="navbar-brand" id="icone-panier-top" href="./panier.html">
+                    <img class="image-top-logo" src="./images/caddy.png" alt="Orinoco logo e-commerce spécialisé"/>
+                    <span class="contenu-panier">(vide)</span>
+                </a>
                 
                 <div id="head-navbar" class="collapse navbar-collapse">
                     <ul class="navbar-nav ">
@@ -46,190 +41,44 @@
                         <li class="nav-item">
                             <a class="nav-link" href="./panier.html">| &nbsp; Votre panier <span contenu-panier></span></a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-toggle="modal" data-target="#modal-formulaire">| &nbsp;Contactez-nous</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-toggle="modal" data-target="#modal-a-propos">| &nbsp; &Agrave; propos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-toggle="modal" data-target="#modal-legales">| &nbsp;Mentions Légales</a>
-                        </li>
                     </ul>
                 </div>
             </nav>
 		</div>
         <div class="jumbotron jumbotron-fluid">
-            <h1 class=" text-center logo-text display-3"><img class="image-logo" src="./images/caddy.png" alt="Orinoco logo e-commerce spécialisé"/>Orinoco</h1>            
+            <h1 class=" text-center logo-text display-3">
+                <!-- <img class="image-logo" src="./images/caddy.png" alt="Orinoco logo e-commerce spécialisé"/> -->
+                OriCamera</h1>            
         </div>
 
 
-        
-      <!-- START modal = formulaire contact -->
-  <div class="modal fade" id="modal-formulaire">
-    <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
-      <div class="modal-content">
-      
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title">  <img src="./images/caddy.png" class="image-modal" alt="Orinoco logo e-commerce spécialisé"><span class="orinoco-form-contact">Orinoco</span> &nbsp;</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        
-        <!-- Modal body -->
-        <div class="modal-body">
-
-                <h2>Formulaire de Contact</h2><hr>
-                <form action="./action_page.php">
-
-                    <div class="form-check">
-                        <label class="form-check-label" for="female">
-                            <input type="radio" class="form-check-input" id="female" name="option-radio" value="female">Mme.
-                        </label>
-                    </div>
-
-                    <div class="form-check">
-                        <label class="form-check-label" for="male">
-                            <input type="radio" class="form-check-input" id="male" name="option-radio" value="male">M.
-                        </label>
-                    </div>
-
-                    <div class="form-check">
-                        <label class="form-check-label" for="other">
-                            <input type="radio" class="form-check-input" id="other" name="option-radio" value="other">Autre
-                        </label>
-                    </div><br>
-
-
-                    <div class="form-group">
-                        <label for="last-name">Nom :</label>
-                        <input type="text" class="form-control" id="last-name" placeholder="Entrez votre nom" name="last-name" required>
-                        <div class="valid-feedback">Valide.</div>
-                        <div class="invalid-feedback">S'il vous plaît, remplissez ce champ.</div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="first-name">Prénom :</label>
-                        <input type="text" class="form-control" id="first-name" placeholder="Entrez votre prénom" name="first-name" required>
-                        <!-- <div class="valid-feedback">Valide.</div>
-                        <div class="invalid-feedback">S'il vous plaît, remplissez ce champ.</div> -->
-                    </div>
-        
-                    <div class="form-group">
-                        <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" class="form-control" placeholder="Enter votre email" required>
-                        <!-- <div class="valid-feedback">Valide.</div>
-                        <div class="invalid-feedback">S'il vous plaît, remplissez ce champ.</div> -->
-                    </div>
-
-                    <div class="form-group">
-                        <label for="uname">Pays :</label>
-                        <input type="text" class="form-control" id="uname" placeholder="Dans quel pays résidez-vous?" name="lieu-pays">
-                        <!-- <div class="valid-feedback">Valide.</div>
-                        <div class="invalid-feedback">S'il vous plaît, remplissez ce champ.</div> -->
-                    </div>
-
-                    <div class="form-group">
-                        <label for="uname">Ville :</label>
-                        <input type="text" class="form-control" id="uname" placeholder="Dans quelle ville résidez-vous" name="lieu-ville">
-                        <!-- <div class="valid-feedback">Valide.</div>
-                        <div class="invalid-feedback">S'il vous plaît, remplissez ce champ.</div> -->
-                    </div>
-
-                    <div class="form-group">
-                        <label for="requete-formulaire">Dites-nous tout ...</label>
-                        <textarea class="form-control" id="requete-formulaire" rows="3" required></textarea>
-                      </div>
-
-                    <div class="form-group form-check">
-                        <label for="form-check-remember">
-                            <input type="checkbox"  id="form-check-remember" class="form-check-input"/>Se souvenir de moi ?
-                        </label>
-                    </div>
-            
-                    <button type="submit" class="btn btn-primary">Enoyez</button>
-                </form>    
-        </div>
-        
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-        </div>
-        
-      </div>
-    </div>
-  </div> <!-- END modal-formulaire-->
-
-
-
-  <!-- START modal= mentions légales -->
-  <div class="modal fade" id="modal-legales">
-    <div class="modal-dialog">
-        <div class="modal-content">
-
-            <!-- modal header -->
-            <div class="modal-header">
-                <h4 class="modal-title">Orinoco : Mentions Léglales</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-
-            <!-- modal body -->
-            <div class="modal-body">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor unde, reprehenderit corporis neque eos laboriosam. Odio eum dolor consectetur, ratione dolores eaque veritatis officia aut incidunt voluptate? Voluptate, temporibus pariatur?
-                <br><br>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor unde, reprehenderit corporis neque eos laboriosam. Odio eum dolor consectetur, ratione dolores eaque veritatis officia aut incidunt voluptate? Voluptate, temporibus pariatur?
-                <br><br>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi cupiditate libero, minima cum incidunt accusantium ut praesentium, maiores velit provident quae consectetur saepe! Deserunt vero deleniti pariatur suscipit labore ipsum.
-                <br><br>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illum at nihil expedita explicabo enim voluptate natus alias accusamus velit. In modi mollitia temporibus magnam aperiam adipisci nam, aliquam perferendis ad?
-            </div>
-
-            <!-- modal footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-     </div>
-  </div> <!-- END  modal= mentions légales -->
-
-
-    <!-- START modal= à propos -->
-    <div class="modal fade" id="modal-a-propos">
-        <div class="modal-dialog">
-            <div class="modal-content">
-
-                <!-- modal header -->
-                <div class="modal-header">
-                    <h4 class="modal-title">Orinoco : &Agrave; propos</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-
-                <!-- modal body -->
-                <div class="modal-body">
-                    Orinoco est une enseigne qui répond à des requêtes spécifiques de ses clients. Plus besoin de passer des heures à rechercher des produits ou articles. <br><br>
-                    Son credo ? Se démarquer des grands site e-commerce comme Amazon en créant des applications thématiques ne vendant qu’un seul groupe de produits. <br> <br>
-                    Il y a par exemple Oribook pour les livres ou Oritextil pour les vêtements.
-                </div>
-
-                <!-- modal footer -->
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div> <!-- END  modal= à propos -->
-
+  
     </header>
     <!--  HEADER-END     ============================= -->
 
 
 
+    <main>
 
 
 
-    <main></main>
 
-    <footer></footer>
+
+
+
+
+
+
+    </main>
+
+
+
+
+    <footer>
+
+
+
+    </footer>
 
 </body>
 </html>
