@@ -1,4 +1,4 @@
-let vitrine = document.querySelector('#vitrine');
+let produit = document.querySelector('#produit');
 let produitVitrine =[];
 
 
@@ -7,13 +7,8 @@ async function getProductsData() {
         let result = await fetch('http://localhost:3000/api/cameras');
         let data = await result.json();
                        
-        // ordonner les objets produits par prix croissant
-        let infosProduits = data.sort(function(a, b) {
-            return a.price - b.price
-        });
-
         // extraire les valeurs individuelles à renseigner
-        infosProduits = infosProduits.map (value => {
+        data = data.map (value => {
             const { lenses, _id, name, description, price, imageUrl } = value;
             return { lenses, _id, name, description, price, imageUrl } 
         });
@@ -25,12 +20,13 @@ async function getProductsData() {
     }
 } 
 
-//  Afficher tous les articles en vente
 async function afficherProduits(infosProduits) {
 
      infosProduits.forEach(article => {
 
-        vitrine.innerHTML +=  
+        //  Afficher articles en vente
+
+        produit.innerHTML +=  
                     `
                     <div class="jumbotron d-flex flex-column flex-md-row articles">
                        <div class="flex-fill">
@@ -40,7 +36,7 @@ async function afficherProduits(infosProduits) {
                           </a>
                         </div>
                         <div class="flex-fill mx-auto text-center">
-                            <h2 class="mb-4 mt-4 display-4"> ${article.name} </h2>
+                            <h2 class="mb-4 mt-4"> ${article.name} </h2>
                             <p>${article.description}</p> 
                             <h4>A partir de ${article.price/100}€</h4>
                             <a id=${article._id} class="btn btn-info mt-4" href="./produit.html?id=${article._id}">Découvrez nos modèles</a>
