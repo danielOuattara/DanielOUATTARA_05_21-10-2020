@@ -12,7 +12,7 @@ async function dataProduit (produit_id) {
         let data = await result.json();
         
         let donneesProduit = JSON.parse (data);
-        //console.log(`donneesProduits = ${donneesProduit}`);
+        console.log(`donneesProduits = ${donneesProduit}`);
 
         // destructurer l'object reçu pour construire les données de l'article
         const {lenses, _id, name, price, description, imageUrl } = donneesProduit;
