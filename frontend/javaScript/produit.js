@@ -1,31 +1,33 @@
 
 
 let produit = document.querySelector('#produit');
-let prixTotal = document.querySelector('#prix-total');
-let quantite = document.querySelector('#quantite');
+let produit_id = window.location.href.match(/[^=]+$/).toString();
 
-
-async function dataProduit (produit_id) { 
+async function dataProduit() { 
 
     try {
         let result = await fetch('http://localhost:3000/api/cameras/'+produit_id);
         let data = await result.json();
+        // console.log(` data = ${data}`)
         
-        let donneesProduit = JSON.parse (data);
-        console.log(`donneesProduits = ${donneesProduit}`);
-
         // destructurer l'object reçu pour construire les données de l'article
-        const {lenses, _id, name, price, description, imageUrl } = donneesProduit;
-        return {lenses, _id, name, price, description, imageUrl }
+        // const {lenses, _id, name, price, description, imageUrl } = data;
+
+        // return {lenses, _id, name, price, description, imageUrl }
+        return data;
 
 
     } catch (error) {
         console.log(error);
     }
-    return ;
 } 
 
   function afficherData(data) {
+        const {lenses, _id, name, price, description, imageUrl } = data;
+        
+        let prixTotal = document.querySelector('#prix-total')
+        let quantiteChoisie = document.querySelector('#quantite');
+
 
         produit.innerHTML =  
                     `
@@ -49,16 +51,16 @@ async function dataProduit (produit_id) {
                              </div>
 
                            <a href="#" data-toggle="modal" data-target="#image-modal">
-                               <img src="http://127.0.0.1:3000/images/vcam_2.jpg" width=600 alt="" class="img-thumbnail img-fluid mx-auto d-block">
+                               <img src=${imageUrl} width=600 alt="" class="img-thumbnail img-fluid mx-auto d-block">
                            </a>
-                           <h4 class="text-center mt-4">${_id}</h4>
+                           <h4 class="text-center mt-4">Référence Art. : ${_id}</h4>
                        </div>
 
                        <div class="flex-fill mx-auto text-center pl-4">
                            <p>${description}</p> 
 
                            <div class="form-group form-inline my-5 pl-4">
-                               <label for="option"><h4>Options : </h4></label>
+                               <label for="option"><h4>Lentilles: </h4></label>
                                <select class="form-control ml-3 col-sm-2" id="option">
                                  <option>${lenses[0]}</option>
                                  <option>${lenses[1]}</option>
@@ -81,7 +83,7 @@ async function dataProduit (produit_id) {
                                </select>
                            </div> 
 
-                           <h3 id="prix-total">total : </h3>
+                           <h3>total : <span id= prix-total>${price/100}</span>€</h3>
                            <button  class="btn btn-info mt-4" href="#">Ajoutez au panier</button>
                        </div>
                    </div>
@@ -93,9 +95,7 @@ async function dataProduit (produit_id) {
 // Créer EventListener pour obtenir les données produits 
 document.addEventListener("DOMContentLoaded", () => {
 
-    dataProduit('5be1ed3f1c9d44000030b061')
+    dataProduit().then(item =>afficherData(item))
     
-    // produitVitrine = dataProduit().then(produits => afficherData(produits));
-
 });
 

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr-FR">
+<head>
+    <meta charset="UTF-8">
+    <title>Orinoco e-commerce</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="./../style/style_index.css">
+    <link rel="shortcut icon" type="image/x-icon" href="./../images/caddy.png" />
+
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+
+    <!-- <script src="./test_server.js"></script> -->
+    
+</head>
+<body>
+
+    
+       
+
+
+    <div class="flex-fill mx-auto text-center pl-4">
+        <div class="form-group form-inline my-5 pl-4">
+            <label for="option"><h4>Options : </h4></label>
+            <select class="form-control ml-3 col-sm-2" id="option">
+                <option>1</option>
+                <option>2</option>
+            </select>
+        </div> 
+
+        <div class="form-group form-inline  pl-4">
+            <label for="quantite"><h4>Quantité : </h4></label>
+            <select class="form-control ml-3 col-sm-2" id="quantite">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+            </select>
+        </div> 
+
+        <h3 id="prix-total">total : <span id= prix-total></span></h3>
+        <button  class="btn btn-info mt-4" href="#">Ajoutez au panier</button>
+    </div>
+
+
+    <script>
+
+        let select = document.querySelector('#quantite');
+        console.log(" type of select= ", typeof select)
+        console.log("select= ", select)
+        console.log(select[0].value)
+        console.log(select[1].value)
+        console.log(select[2].value)
+        console.log(select[3].value)
+        console.log(select[4].value)
+        console.log(select[5].value)
+        console.log(select[6].value)
+        //select[0].value= 3;
+
+
+        let prixTotal = document.querySelector('#prix-total')
+        // prixTotal.innerHTML = 
+
+
+
+
+
+
+
+    </script>
+
+
+
+
+    <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <!-- <script src="./../javaScript/produit.js"></script> -->
+</body>
+</html>
+
+
+
