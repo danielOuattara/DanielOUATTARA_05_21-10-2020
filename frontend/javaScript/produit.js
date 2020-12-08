@@ -22,12 +22,9 @@ async function dataProduit() {
     }
 } 
 
-  function afficherData(data) {
+ async function afficherData(data) {
         const {lenses, _id, name, price, description, imageUrl } = data;
         
-        let prixTotal = document.querySelector('#prix-total')
-        let quantiteChoisie = document.querySelector('#quantite');
-
 
         produit.innerHTML =  
                     `
@@ -51,7 +48,7 @@ async function dataProduit() {
                              </div>
 
                            <a href="#" data-toggle="modal" data-target="#image-modal">
-                               <img src=${imageUrl} width=600 alt="" class="img-thumbnail img-fluid mx-auto d-block">
+                               <img src=${imageUrl} id="hover-image" width=600 alt="" class="img-thumbnail img-fluid mx-auto d-block">
                            </a>
                            <h4 class="text-center mt-4">Référence Art. : ${_id}</h4>
                        </div>
@@ -89,6 +86,20 @@ async function dataProduit() {
                    </div>
                </div>
                     `;
+
+
+    let prixTotal = document.querySelector('#prix-total')
+    let quantiteChoisie = document.querySelector('#quantite');
+
+
+    let image_2 = document.getElementById('hover-image')
+    image_2.addEventListener('mouseover', function() {
+        this.style.opacity ='0.7'
+    });
+    image_2.addEventListener('mouseout', function() {
+        this.style.opacity ='1'
+    });
+            
 };
 
 
