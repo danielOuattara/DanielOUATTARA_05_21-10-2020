@@ -12,7 +12,7 @@ async function getProductsData() {
             return a.price - b.price
         });
 
-        // extraire les valeurs individuelles à renseigner
+        // extraire les valeurs individuelles de tous à renseigner
         infosProduits = infosProduits.map (value => {
             const { lenses, _id, name, description, price, imageUrl } = value;
             return { lenses, _id, name, description, price, imageUrl } 
