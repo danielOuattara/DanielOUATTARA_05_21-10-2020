@@ -99,9 +99,15 @@ async function dataProduit() {
                            </div> 
 
                            <h3>total : <span id="prix-total">${price/100}</span>€</h3>
-                           <button  class="btn btn-info mt-4" href="#">Ajoutez au panier</button>
+                           <button class="btn btn-info mt-4 ajoutez-panier">Ajoutez au panier</button>
                        </div>
                    </div>
+
+                   <div class>
+                        <a class="btn btn-info mt-4 ajoutez-panier" href="./../html/index.html">Revenir en vitrine</a>
+                        <a class="btn btn-info mt-4 ajoutez-panier" href="./../html/panier.html">Allez au panier</a>
+                   <div>
+
                </div>
                     `;
 
@@ -120,8 +126,6 @@ async function dataProduit() {
     quantiteArticle.addEventListener('change', (event)=> {
         prixTotal.textContent  = event.target.value * price/100;
     });
-
-
                 
 };
 
@@ -132,4 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
     dataProduit().then(item =>afficherData(item))
     
 });
+
+
+
 
