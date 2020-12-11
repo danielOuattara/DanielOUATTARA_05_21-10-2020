@@ -25,25 +25,6 @@ async function dataProduit() {
  async function afficherData(data) {
         const {lenses, _id, name, price, description, imageUrl } = data;
 
-
-        //MAYDAY MAYDAY MAYDAY-------------------------------------------------
-
-            // Voir camera :  Franck JS 105, "la seconde option" n'est pas prédéfinie
-
-            // if (lenses[1] == null) lenses[1] = "" // --> OK , mais pas élégant: affiche vide           
-
-      
-
-            //regulationOption   
-            // let optionArticle = document.querySelector('.option-article');
-            // if (lenses[1] == null ) optionArticle[1].disabled = "true"  
-        
-        //----------------------------------------------------------------------
-
-    
-        console.log(lenses[0]);
-        
-
         produit.innerHTML =  
                     `
                     <div class="jumbotron">
@@ -68,37 +49,31 @@ async function dataProduit() {
                            <a href="#" data-toggle="modal" data-target="#image-modal">
                                <img src=${imageUrl} id="hover-image" width=600 alt="" class="img-thumbnail img-fluid mx-auto d-block">
                            </a>
-                           <h4 class="text-center mt-4">Référence Art. : ${_id}</h4>
+                           <h5 class="text-center mt-4">Référence Art. : ${_id}</h5>
                        </div>
 
-                       <div class="flex-fill mx-auto text-center pl-4">
-                           <p>${description}</p> 
+                       <div class="flex-fill  text-center pl-4">
+                           <p class="text-left text-sm-center">${description}</p> 
 
                            <div class="form-group form-inline my-5 pl-4">
-                               <label for="option"><h4>Lentilles: </h4></label>
-                               <select class="form-control ml-3 col-sm-2" class="option-article">
-                                 <option value=${lenses[0]} > ${lenses[0]} </option>
-                                 <option value=${lenses[1]} class="option-article"> ${lenses[1]} </option>
-                               </select>
-                           </div> 
+                               <label for="option"><h4>Lentilles : </h4></label>
+                               <select class="form-control ml-3 col-sm-2 options-lentilles" id=""> 
 
+                                 <!--Contient toutes les options de lentilles générées dynamiquement -->
+                                 
+                               </select>
+                           </div>
+
+                           <h4 class= "my-5 pl-4 text-left">Prix unité : ${price/100}€</h4>
+                           
                            <div class="form-group form-inline  pl-4">
                                <label for="quantite"><h4>Quantité : </h4></label>
                                <select class="form-control ml-3 col-sm-2 quantite-article">
-                                 <option value=1> 1 </option>
-                                 <option value=2> 2 </option>
-                                 <option value=3> 3 </option>
-                                 <option value=4> 4 </option>
-                                 <option value=5> 5 </option>
-                                 <option value=6> 6 </option>
-                                 <option value=7> 7 </option>
-                                 <option value=8> 8 </option>
-                                 <option value=9> 9</option>
-                                 <option value=10> 10</option>
+
                                </select>
                            </div> 
 
-                           <h3>total : <span id="prix-total">${price/100}</span>€</h3>
+                           <h3>Total : <span id="prix-total">${price/100}</span>€</h3>
                            <button class="btn btn-info mt-4 ajoutez-panier">Ajoutez au panier</button>
                        </div>
                    </div>
@@ -120,13 +95,39 @@ async function dataProduit() {
         this.style.opacity ='1'
     });
 
+    // ajustement des options lentilles:
+
+    let selectOptionsLentilles = document.querySelector('.options-lentilles');
+    let i;
+    for(i = 0; i < lenses.length; i++) {
+        let optionLentille = document.createElement('option');
+        optionLentille.setAttribute("value", lenses[i] );
+         let contenuOption = document.createTextNode(lenses[i]);
+        optionLentille.appendChild(contenuOption);
+        selectOptionsLentilles.appendChild(optionLentille);
+    }
+
+
+    // Controle de la quantité choisie par article unique: 
+    let selectQuantiteArticles = document.querySelector('.quantite-article');
+    let quantiteMaxArticles = 11;
+      for( i = 1 ; i < quantiteMaxArticles; i++ ) {
+          let quantiteArticlesChoisie = document.createElement('option');
+          quantiteArticlesChoisie.setAttribute("value", i);
+          let quantiteArticlesChoisie_valeur = document.createTextNode(i);
+          quantiteArticlesChoisie.appendChild(quantiteArticlesChoisie_valeur);
+          selectQuantiteArticles.appendChild(quantiteArticlesChoisie);
+
+
+      }
+
+
     //  Calcul du prix total selon quantité articles choisies
     let prixTotal = document.querySelector('#prix-total')
-    let quantiteArticle = document.querySelector('.quantite-article');
-    quantiteArticle.addEventListener('change', (event)=> {
+    selectQuantiteArticles.addEventListener('change', (event)=> {
         prixTotal.textContent  = event.target.value * price/100;
     });
-                
+              
 };
 
 
