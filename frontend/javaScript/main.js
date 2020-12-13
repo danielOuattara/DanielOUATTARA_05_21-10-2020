@@ -1,7 +1,3 @@
-let vitrine = document.querySelector('#vitrine');
-let produitVitrine =[];
-
-
 async function getProductsData() {
     try {
         let result = await fetch('http://localhost:3000/api/cameras');
@@ -25,11 +21,11 @@ async function getProductsData() {
     }
 } 
 
+
 //  Afficher tous les articles en vente
-async function afficherProduits(infosProduits) {
-
-     infosProduits.forEach(article => {
-
+function afficherProduits(infosProduits) {
+    let vitrine = document.querySelector('#vitrine');
+    infosProduits.forEach(article => {
         vitrine.innerHTML +=  
                     `
                     <div class="jumbotron d-flex flex-column flex-md-row articles">
@@ -48,12 +44,25 @@ async function afficherProduits(infosProduits) {
                     </div>
                     `;
     });
+
+
+    // Opacity 50% des images 
+    let imageAffiche = document.querySelectorAll('img')
+    let i = 0;
+    for( i = 0 ; i < imageAffiche.length ; i++) {
+        imageAffiche[i].addEventListener('mouseover', function() {
+            this.style.opacity ='0.7'
+        });
+        imageAffiche[i].addEventListener('mouseout', function() {
+            this.style.opacity ='1'
+        });
+    }
 };
 
-// Créer EventListener pour obtenir les données produits 
+// Créer EventListener pour obtenir les données produits depuis le serveur
 document.addEventListener("DOMContentLoaded", () => {
-    
-     produitVitrine = getProductsData().then(produits => afficherProduits(produits));
+    let produitVitrine =[];
+    produitVitrine = getProductsData().then(produits => afficherProduits(produits));
 
 });
 
