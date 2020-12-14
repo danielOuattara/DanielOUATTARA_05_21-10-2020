@@ -7,8 +7,29 @@ header {
   background: #ede0e6;
 }
 
-header .image-top-logo {
+header #icone-panier-top {
+  position: relative;
+  font-size: 12px !important;
+}
+
+header #icone-panier-top .image-top-logo {
   width: 35px;
+}
+
+header #icone-panier-top .contenu-panier {
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  border-radius: 30%;
+  background: #fff;
+  padding: 2px 5px;
+  color: #000 !important;
+}
+
+header #icone-panier-top .montant-panier {
+  position: relative;
+  top: 0px;
+  left: 10px;
 }
 
 header h1 {
@@ -20,14 +41,15 @@ header h1 .image-logo {
   width: 100px;
 }
 
-header .image-modal {
-  width: 45px;
-}
-
 header .bloc-titre {
   background: #ede0e6 !important;
 }
 
 footer img {
   width: 60px;
+}
+
+i {
+  font-size: 20px;
+  margin-left: 10px;
 }

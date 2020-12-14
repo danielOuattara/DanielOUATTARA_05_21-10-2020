@@ -10,9 +10,42 @@ $logo-font: belligerent, "sans serif";
 header {
     background: #ede0e6;
 
-   .image-top-logo{
-        width: 35px;
+    #icone-panier-top {
+        position: relative;
+        font-size: 12px!important;
+        // display: inline-block;
+        // padding: 2px 10px;
+        // border: 1px solid green;
+
+        &:hover {
+            //background: #fff;
+            // border: 1px solid #fff;
+            // border-radius: 20%;
+        }
+
+        .image-top-logo{
+            width: 35px;
+        }
+
+        .contenu-panier {
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            border-radius: 30%;
+            background: #fff;
+            padding: 2px 5px; 
+            color: #000!important;
+            
+        }
+        .montant-panier {
+            position: relative;
+            top: 0px;
+            left: 10px;
+        }
+
     }
+
+
 
     h1{
         color: #2a1e26;
@@ -23,10 +56,6 @@ header {
      width: 100px;
     }
 
-    .image-modal {
-        width: 45px;
-    }
-
     .bloc-titre {
         background: #ede0e6 !important;
     }
@@ -34,6 +63,8 @@ header {
 }
 
 main {
+
+
     
 }
 
@@ -41,4 +72,9 @@ footer{
     img {
         width: 60px;
     }
+}
+
+i {
+    font-size: 20px;
+    margin-left: 10px;
 }

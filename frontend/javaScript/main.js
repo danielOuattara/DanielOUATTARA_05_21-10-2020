@@ -1,3 +1,5 @@
+import {updatePanierHeader}  from  './updatePanierHeader.js';
+
 async function getProductsData() {
     try {
         let result = await fetch('http://localhost:3000/api/cameras');
@@ -38,7 +40,7 @@ function afficherProduits(infosProduits) {
                         <div class="flex-fill mx-auto text-center">
                             <h2 class="mb-4 mt-4 display-4"> ${article.name} </h2>
                             <p>${article.description}</p> 
-                            <h4>A partir de ${article.price/100}€</h4>
+                            <h4>&Agrave partir de ${article.price/100}€</h4>
                             <a id=${article._id} class="btn btn-info mt-4" href="./produit.html?id=${article._id}">Découvrez nos modèles</a>
                         </div>
                     </div>
@@ -65,4 +67,24 @@ document.addEventListener("DOMContentLoaded", () => {
     produitVitrine = getProductsData().then(produits => afficherProduits(produits));
 
 });
+
+updatePanierHeader();
+
+
+
+// let contenuPanier = document.querySelector('.contenu-panier');
+// let montantPanier = document.querySelector('.montant-panier');
+
+// // localStorage.clear();
+// for (i = 0; i < localStorage.length; i++) {
+//     clefArticleChoisie = localStorage.key(i);
+//     console.log(clefArticleChoisie);
+//     let articlesChoisiesJSON = localStorage.getItem(clefArticleChoisie);
+//     let articlesChoisies = JSON.parse(articlesChoisiesJSON);
+//     console.log(clefArticleChoisie)
+//     console.log(articlesChoisies);
+//     contenuPanier.innerHTML = articlesChoisies[4];
+//     montantPanier.innerHTML += articlesChoisies[5];                
+// }
+
 

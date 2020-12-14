@@ -1,3 +1,5 @@
+import { updatePanierHeader } from './updatePanierHeader.js'
+
 let quantiteChoisie = 1;
 
 async function dataProduit() { 
@@ -95,7 +97,8 @@ async function afficherData(data) {
     //  Calcul du prix total selon quantité articles choisies
     let prixTotal = document.querySelector('#prix-total')
     selectQuantiteArticles.addEventListener('change', (event)=> {
-        prixTotal.textContent = event.target.value * price/100;
+        prixTotal.innerHTML = event.target.value * price/100;
+
     });
 
 
@@ -122,13 +125,54 @@ async function afficherData(data) {
     lentilleChoisie = event.target.value;
     console.log(`lentilleChoisie = ${lentilleChoisie}`)
     })
-
+ 
+    // ajouter un article au panier
     let ajouterPanier = document.querySelector('.ajoutez-panier')
-    ajouterPanier.addEventListener('click', () => {
-        let articleChoisie = [name, _id, imageUrl, lentilleChoisie, quantiteChoisie, prixTotal.textContent]
+    ajouterPanier.addEventListener('click', (event) => {
+        let clickCount = 0;
+        console.log(ajouterPanier);
+        clickCount ++;
+
+        if (clickCount > 1) {
+
+            console.log(`clickCount =  ${clickCount}`);
+            // produit.innerHTML +=  
+            // ` <div class="alert alert-warning alert-dismissible fade show">
+            //     <button type="button" class="close" data-dismiss="alert">&times;</button>
+            //     <strong>Success!</strong> This alert box could indicate a successful or positive action.
+            //   </div>
+            // `
+        }
+
+        let articleChoisie = [name, _id, imageUrl, lentilleChoisie, quantiteChoisie, prixTotal.textContent, price/100];
         console.log(`articleChoisie =  ${articleChoisie}`);
         let articleChoisieJSON = JSON.stringify(articleChoisie);
-        localStorage.setItem(name, articleChoisieJSON);
+        localStorage.setItem(lentilleChoisie, articleChoisieJSON);
+
+        produit.innerHTML += 
+         ` <div class="alert alert-success alert-dismissible fade show">
+             <button type="button" class="close" data-dismiss="alert">&times;</button>
+             Article <strong>${name}</strong> a bien été ajouté au panier.
+           </div>
+         `
+    
+    // alert fadeIn/ fadeOut
+    //     produit.innerHTML += ` <div class="alert alert-success" id="success-alert">
+    //     <button type="button" class="close" data-dismiss="alert">x</button>
+    //     <strong>Success! </strong> Product have added to your wishlist.
+    //   </div>`
+    //     $(document).ready(function() {
+    //         $("#success-alert").hide();
+    //         $("#myWish").click(function showAlert() {
+    //           $("#success-alert").fadeTo(2000, 500).slideUp(500, function() {
+    //             $("#success-alert").slideUp(500);
+    //           });
+    //         });
+    //       });
+
+    updatePanierHeader();
+
+
     });
 
     console.log(localStorage.length)
@@ -139,10 +183,10 @@ async function afficherData(data) {
 // Créer EventListener pour obtenir les données produits 
 document.addEventListener("DOMContentLoaded", () => {
     dataProduit().then(item =>afficherData(item));
-
-
+    
 
 });
+
 
 
 
