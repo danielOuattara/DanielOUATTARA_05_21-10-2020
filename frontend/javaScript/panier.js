@@ -1,15 +1,18 @@
 
 import {updatePanierHeader} from './updatePanierHeader.js';
 
-// localStorage.clear();
 
 // Afficher tous les articles choisis dans le panier
+
+let panierCommande = [];
+
 async function afficherPanier() {
-     console.log(localStorage.length);
+     console.log(`localStorage Length = ` , localStorage.length);
      for ( let i = 0; i < localStorage.length; i++) {
         let clefArticleChoisie = localStorage.key(i);
         let articlesChoisiesJSON = localStorage.getItem(clefArticleChoisie);
         let articlesChoisies = JSON.parse(articlesChoisiesJSON);
+        panierCommande.push(articlesChoisies);
 
         console.log(clefArticleChoisie)
         console.log(articlesChoisies);
@@ -26,45 +29,91 @@ async function afficherPanier() {
                             <div class="flex-fill mx-auto text-center">
                                 <h2 class="mb-4 mt-4"> ${articlesChoisies[0]} </h2> 
                                 <p>Lentilles Choisie :  ${articlesChoisies[3]}</p>
-
                                 <div>
                                     <span>Quantite choisie : ${articlesChoisies[4]} </span>
-
-                                    <p><i class="far fa-minus-square"></i> &nbsp;<i class="far fa-plus-square"></i></p>
-  
+                                    <p><i class="far fa-minus-square btn"></i> &nbsp;<i class="far fa-plus-square btn"></i></p>
                                 </div>
-
                                 <p>Prix Unitaire :  ${articlesChoisies[6]}€</p>
                                 <p>Prix Total :  ${articlesChoisies[5]}€</p>
-                                <a class="btn btn-info mt-4 supprimer-article">Supprimez Article</a>
+                                <button class="btn btn-info mt-4 supprimer-article">Supprimez Article</button>
                             </div>
-
                             <div class="d-md-flex justify-content-between text-center">
                             <div>
-
-
                         </div>
                         `;
           }
 
-          updatePanierHeader();
+          
 };
-
-
-
-// formulaire du contact
-
-
-
-
-
-
 
 document.addEventListener("DOMContentLoaded", () => {
 
 afficherPanier();
+
 });
 
+updatePanierHeader();
+
+// supprimer article
+//-------------------
+
+
+// if (localStorage.lenght !== 0 ) {
+//     let supprimerArticle = document.querySelector('.supprimer-article');
+//     supprimerArticle.addEventListener('click', () => {
+//         localStorage.removeItem(this.key);
+// })
+
+// };
+
+
+// vider panier
+
+let videurPanier = document.querySelector('.vider-panier');
+
+videurPanier.addEventListener('click', () => {
+    localStorage.clear();
+    updatePanierHeader();
+    afficherPanier();
+});
+
+// afficher button : vider-panier
+
+const cacherVideurPanier = () => {
+    if (localStorage.length  == 0 ) {
+        document.querySelector('.vider-panier').style.visibility = "hidden";
+    }
+}
+cacherVideurPanier();
+
+
+// formulaire du contact : code de validation coté client
+(function() {
+    'use strict';
+    window.addEventListener('load', function() {
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      var forms = document.getElementsByClassName('needs-validation');
+      // Loop over them and prevent submission
+      var validation = Array.prototype.filter.call(forms, function(form) {
+        form.addEventListener('submit', function(event) {
+          if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+    }, false);
+  })();
+
+
+  // génération de l'objet de commande : les articles + formulaire valide
+
+
+//   let commande =  {
+//        articles = [], 
+//        formulaire = []
+//     }
 
 
 

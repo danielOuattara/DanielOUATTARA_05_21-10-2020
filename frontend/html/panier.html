@@ -10,13 +10,10 @@
     <script src="https://kit.fontawesome.com/2ca4bf7488.js" crossorigin="anonymous"></script>
     <link rel="shortcut icon" type="image/x-icon" href="./images/favicon.png" />
     <link rel="stylesheet" href="./../style/style_index.css">
-
-    
 </head>
 <body>
     
     <!--  HEADER     ============================= -->
-    
     <header>
         <div class="container-fluid bg-dark">
             <nav class="navbar navbar-expand-sm navbar-dark">
@@ -51,44 +48,95 @@
 
 
 
-
-
-
-
-
    <!--  MAIN     ============================= -->
     <main>
-
-
         <div class="container " id="vitrine">
-
+            <!-- Contenu généré par "panier.js" -->
         </div> 
 
 
-        
+        <div class="container text-center mb-3">
+            <button class="btn btn-danger vider-panier">Videz votre panier</button>
+         </div>
+
+    <div class=""></div>
+    
+    <div class="container border rounded border-dark p-5">
+        <h2>Formulaire de commande</h2>
+
+        <form class="needs-validation" novalidate>
+
+            <div class="form-row">
+                <div class="col-md-4 mb-3">
+                    <label for="nom">Nom</label>
+                    <input type="text" class="form-control" id="nom" required />
+                    <div class="valid-feedback">valide </div>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <label for="prenom">Prénom</label>
+                    <input type="text" class="form-control" id="prenom" required>
+                    <div class="valid-feedback">Looks good!</div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="email">e-mail</label>
+                    <input type="email" class="form-control" id="email" required>
+                    <div class="valid-feedback">Looks good!</div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-md-4 mb-3">
+                    <label for="adresse">Adresse (Numéro & voie ou autres)</label>
+                    <input type="text" class="form-control" id="adresse" required />
+                    <div class="invalid-feedback">valide </div>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <label for="code-postale">Code Postale</label>
+                    <input type="text" class="form-control" id="code-postale" pattern="[0-9]{5}" required >
+                    <div class="valid-feedback">Looks good!</div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="ville">Ville</label>
+                    <input type="text" class="form-control" id="ville" required>
+                    <div class="valid-feedback">Looks good!</div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-md-4 mb-3">
+                    <label for="pays">Pays</label>
+                    <input type="text" class="form-control" id="pays" required />
+                    <div class="invalid-feedback">valide </div>
+                </div>
+                <div class="col-md-8 mb-3">
+                    <label for="commentaires">Vos commentaires</label>
+                    <textarea class="form-control" id="commentaires" rows="3" placeholder="Précisez ici toutes les autres informations utiles pour votre commande..."></textarea>
+                  </div>
+            </div>
+
+            <div class="form-group">
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                <label class="form-check-label" for="invalidCheck"> Vous acceptez les Condtions Générale de Vente </label>
+                <div class="invalid-feedback">Vous êtes invité à accepter les CGV en cochant la case ci-contre.</div>
+            </div>
+            </div>
+            <button class="btn btn-primary" type="submit">Confirmez votre commande</button>
+        </form>
+    
+    </div>
     </main>
     <!--  MAIN-END     ============================= -->
 
-
-
-
-
-
-
-
-
-
-
-
-    <footer>
-
-    </footer>
+    <footer></footer>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-
     <script type="module" src="./../javaScript/panier.js"></script>
 
 </body>

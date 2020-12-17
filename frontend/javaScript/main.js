@@ -1,35 +1,155 @@
-import {updatePanierHeader}  from  './updatePanierHeader.js';
+import {sendXHR}  from './sendXHR.js'
+import {updatePanierHeader}  from  './updatePanierHeader.js'
 
-async function getProductsData() {
-    try {
-        let result = await fetch('http://localhost:3000/api/cameras');
-        let data = await result.json();
-                       
-        // ordonner les objets produits par prix croissant
-        let infosProduits = data.sort(function(a, b) {
-            return a.price - b.price
-        });
 
-        // extraire les valeurs individuelles de tous à renseigner
-        infosProduits = infosProduits.map (value => {
-            const { lenses, _id, name, description, price, imageUrl } = value;
-            return { lenses, _id, name, description, price, imageUrl } 
-        });
 
-        return infosProduits;
 
-    } catch (error) {
-        console.log(error);
-    }
-} 
+// async function filtrationData(responseData) {
+//     let infosProduits = [];
+//     let optionFiltre = document.querySelector('#filtre');
+//     optionFiltre.addEventListener('change', (event) => {
+
+//         console.log(event.target.value) // OK
+//         switch (event.target.value) {
+
+//             case "nomCroissant":
+//                 infosProduits = responseData.sort(function(a, b) {  
+//                     return a.price - b.price  // ordonner les articles par prix croissant
+//                     return infosProduits
+//                 })
+//                 break;
+
+//             case "nomDecroissant":
+//                 infosProduits = responseData.sort(function(a, b) {  
+//                     return b.price - a.price  // ordonner les articles par prix décroissant
+//                     return infosProduits
+//                 })
+//                 break;
+
+//             case "prixCroissant":
+//                 infosProduits = responseData.sort(function(a, b) {  // ordonner les articles par nom croissant
+//                     if (a.name.toLowerCase() < b.name.toLowerCase()) {return -1;}
+//                     if (a.name.toLowerCase() > b.name.toLowerCase()) {return 1;}
+//                     return infosProduits
+//                 })
+//                 break;
+
+//             case "prixDecroissant":
+//                 infosProduits = responseData.sort(function(a, b) {  // ordonner les articles par nom décroissant
+//                     if (a.name.toLowerCase() < b.name.toLowerCase()) {return 1;}
+//                     if (a.name.toLowerCase() > b.name.toLowerCase()) {return -1;}
+//                     return infosProduits
+//                 })
+//                 break;
+            
+//         }
+        
+
+//     });
+   
+
+// }
+
+
+
 
 
 //  Afficher tous les articles en vente
-function afficherProduits(infosProduits) {
+
+
+async function afficherProduits(responseData) {  
+
+    responseData = responseData.sort(function(a, b) {  
+        return a.price - b.price  // ordonner les articles par prix croissant
+    });
+
+    let optionFiltre = document.querySelector('#filtre');
+    optionFiltre.addEventListener('mouseup', (event) => {
+
+       let  result = event.target.value;
+
+        console.log(event.target.value) // OK
+
+        if (result == "nomCroissant") {
+            responseData = responseData.sort(function(a, b) {  
+                return a.price - b.price  // ordonner les articles par prix croissant  
+            });
+
+        } /*else*/ if (result == "nomDecroissant") {
+            responseData = responseData.sort(function(a, b) {  
+                return a.price - b.price  // ordonner les articles par prix croissant  
+            });
+
+        } /*else*/ if (result == "prixCroissant") {
+            responseData = responseData.sort(function(a, b) {  
+                return a.price - b.price  // ordonner les articles par prix croissant  
+            });
+
+        } /*else*/ if (result == "prixDecroissant") {
+            responseData = responseData.sort(function(a, b) {  
+                return a.price - b.price  // ordonner les articles par prix croissant  
+            });
+        }
+
+        //-----------------------------------
+        // switch (event.target.value) {
+
+        //     case "nomCroissant":
+        //         infosProduits = responseData.sort(function(a, b) {  
+        //             return a.price - b.price  // ordonner les articles par prix croissant  
+        //         })
+
+        //         break;
+
+        //     case "nomDecroissant":
+        //         infosProduits = responseData.sort(function(a, b) {  
+        //             return b.price - a.price  // ordonner les articles par prix décroissant 
+        //         })
+
+        //         break;
+
+        //     case "prixCroissant":
+        //         infosProduits = responseData.sort(function(a, b) {  // ordonner les articles par nom croissant
+        //             if (a.name.toLowerCase() < b.name.toLowerCase()) {return -1;}
+        //             if (a.name.toLowerCase() > b.name.toLowerCase()) {return 1;} 
+        //         })
+
+        //         break;
+
+        //     case "prixDecroissant":
+        //         infosProduits = responseData.sort(function(a, b) {  // ordonner les articles par nom décroissant
+        //             if (a.name.toLowerCase() < b.name.toLowerCase()) {return 1;}
+        //             if (a.name.toLowerCase() > b.name.toLowerCase()) {return -1;} 
+        //         })
+
+        //         break;
+        // }
+
+
+
+
+
+
+      
+
+    });
+
+
+    
+
+    // });
+   
+    // let infosProduits = responseData.sort(function(a, b) {  
+    //     return b.price - a.price  // ordonner les articles par prix croissant
+    // });
+    // let  infosProduits = responseData.sort(function(a, b) {
+    //     if (a.name.toLowerCase() < b.name.toLowerCase()) {return 1;}
+    //     if (a.name.toLowerCase() > b.name.toLowerCase()) {return -1;}
+    // });
+    
     let vitrine = document.querySelector('#vitrine');
-    infosProduits.forEach(article => {
-        vitrine.innerHTML +=  
-                    `
+    responseData.forEach(article => {
+        vitrine.innerHTML += `
                     <div class="jumbotron d-flex flex-column flex-md-row articles">
                        <div class="flex-fill">
                           <a href="./produit.html?id=${article._id}" >
@@ -43,48 +163,37 @@ function afficherProduits(infosProduits) {
                             <h4>&Agrave partir de ${article.price/100}€</h4>
                             <a id=${article._id} class="btn btn-info mt-4" href="./produit.html?id=${article._id}">Découvrez nos modèles</a>
                         </div>
-                    </div>
-                    `;
+                    </div> `;
+        return vitrine;
     });
+};
 
 
-    // Opacity 50% des images 
-    let imageAffiche = document.querySelectorAll('img')
-    let i = 0;
-    for( i = 0 ; i < imageAffiche.length ; i++) {
+// Opacity 75% des images 'mouseover'
+function imageOpacity () {
+    let imageAffiche = document.querySelectorAll('img');
+    for(let i = 0 ; i < imageAffiche.length ; i++) {
         imageAffiche[i].addEventListener('mouseover', function() {
-            this.style.opacity ='0.7'
+            this.style.opacity ='0.75'
         });
         imageAffiche[i].addEventListener('mouseout', function() {
             this.style.opacity ='1'
         });
     }
-};
+}
 
-// Créer EventListener pour obtenir les données produits depuis le serveur
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {  // affichage vitrine au chargement terminé
     let produitVitrine =[];
-    produitVitrine = getProductsData().then(produits => afficherProduits(produits));
-
+    produitVitrine = sendXHR('GET', 'http://localhost:3000/api/cameras')
+                      /*.then(filtrationData)*/
+                      .then(infoProduits => afficherProduits(infoProduits) ,
+                            errorResponseData => {
+                                const error = new Error ("Error in vitrine rendering");
+                                error.data = errorResponseData;
+                                throw error;
+                      }).then(imageOpacity);
 });
 
 updatePanierHeader();
-
-
-
-// let contenuPanier = document.querySelector('.contenu-panier');
-// let montantPanier = document.querySelector('.montant-panier');
-
-// // localStorage.clear();
-// for (i = 0; i < localStorage.length; i++) {
-//     clefArticleChoisie = localStorage.key(i);
-//     console.log(clefArticleChoisie);
-//     let articlesChoisiesJSON = localStorage.getItem(clefArticleChoisie);
-//     let articlesChoisies = JSON.parse(articlesChoisiesJSON);
-//     console.log(clefArticleChoisie)
-//     console.log(articlesChoisies);
-//     contenuPanier.innerHTML = articlesChoisies[4];
-//     montantPanier.innerHTML += articlesChoisies[5];                
-// }
 
 

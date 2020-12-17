@@ -9,7 +9,7 @@ header {
 
 header #icone-panier-top {
   position: relative;
-  font-size: 12px !important;
+  font-size: 13px !important;
 }
 
 header #icone-panier-top .image-top-logo {
@@ -18,11 +18,11 @@ header #icone-panier-top .image-top-logo {
 
 header #icone-panier-top .contenu-panier {
   position: absolute;
-  top: -10px;
+  top: -4px;
   left: 10px;
-  border-radius: 30%;
+  border-radius: 50%;
   background: #fff;
-  padding: 2px 5px;
+  padding: 1px 4px;
   color: #000 !important;
 }
 
@@ -50,6 +50,7 @@ footer img {
 }
 
 i {
-  font-size: 20px;
-  margin-left: 10px;
+  display: inline-block;
+  font-size: 26px !important;
+  margin-left: 5px;
 }

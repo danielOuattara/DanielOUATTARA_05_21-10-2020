@@ -1,17 +1,10 @@
+import { sendXHR } from './sendXHR.js';
 import { updatePanierHeader } from './updatePanierHeader.js'
 
-let quantiteChoisie = 1;
 
-async function dataProduit() { 
-    try {
-        let produit_id = window.location.href.match(/[^=]+$/).toString();
-        let result = await fetch('http://localhost:3000/api/cameras/'+produit_id);
-        let data = await result.json();
-        return data;
-    } catch (error) {
-        console.log(error);
-    }
-} 
+let buttonAjouterPanier = document.querySelector('.ajoutez-panier')
+
+//let quantiteChoisie = 1; 
 
 async function afficherData(data) {
     const {lenses, _id, name, price, description, imageUrl } = data;
@@ -60,10 +53,10 @@ async function afficherData(data) {
             </div>`;
 
 
-    // Opacity 50% des images 
+    // Opacity 75% des images 
     let image_2 = document.querySelector('.hover-image')
     image_2.addEventListener('mouseover', function() {
-        this.style.opacity ='0.7'
+        this.style.opacity ='0.75'
     });
     image_2.addEventListener('mouseout', function() {
         this.style.opacity ='1'
@@ -73,7 +66,7 @@ async function afficherData(data) {
     // ajustement des options lentilles:
     let selectOptionsLentilles = document.querySelector('.options-lentilles');
     let i;
-    for(i = 0; i < lenses.length; i++) {
+    for(i = 0 ; i < lenses.length ; i++) {
         let optionLentille = document.createElement('option');
         optionLentille.setAttribute("value", lenses[i] );
         let contenuOption = document.createTextNode(lenses[i]);
@@ -82,10 +75,10 @@ async function afficherData(data) {
     }
 
 
-    // Controle de la quantité choisie par article unique: 
+    // Controle de la quantité choisie pour 1 article: 
     let selectQuantiteArticles = document.querySelector('.quantite-article');
-    let quantiteMaxArticles = 11;
-    for( i = 1 ; i < quantiteMaxArticles; i++ ) {
+    let quantiteMaxArticles = 100;
+    for( i = 1 ; i <= quantiteMaxArticles; i++ ) {
         let optionQuantiteArticles = document.createElement('option');
         optionQuantiteArticles.setAttribute("value", i);
         let quantiteArticlesChoisie_valeur = document.createTextNode(i);
@@ -93,69 +86,90 @@ async function afficherData(data) {
         selectQuantiteArticles.appendChild(optionQuantiteArticles);
     }
 
-
     //  Calcul du prix total selon quantité articles choisies
     let prixTotal = document.querySelector('#prix-total')
     selectQuantiteArticles.addEventListener('change', (event)=> {
         prixTotal.innerHTML = event.target.value * price/100;
-
     });
 
-
-    // Capter le nombre d'article et prix total choisi par un client
-    let quantiteChoisie = selectQuantiteArticles.value
-    console.log(`quantiteChoisie =  ${quantiteChoisie} `)  // initialement
-
-    selectQuantiteArticles.addEventListener('change', (event) => {
-        // Si changement alors nouvelles valeurs quantite et €
-    quantiteChoisie = event.target.value;
-    console.log(`quantiteChoisie =  ${quantiteChoisie} `);
-    console.log(prixTotal.textContent);
+    // Capter le nombre d'article choisi par un client et prix total
+    let quantiteChoisie = selectQuantiteArticles.value;
+    console.log(`prixTotal initial  = `, prixTotal.textContent)
+    selectQuantiteArticles.addEventListener('change', (event) => {  // Si changement alors nouvelles valeurs quantite et €
+        quantiteChoisie = event.target.value;
+        console.log('qunaité choisie = ', quantiteChoisie);
     })
-
-    console.log(prixTotal.textContent);  // prix-total: avant OU apres changement
 
 
     // Capter le type de lentille choisie: 
-    let lentilleChoisie = selectOptionsLentilles.value;
-    console.log(`lentille choisie = ${lentilleChoisie}`)  // initialement
-    
-    selectOptionsLentilles.addEventListener('change', (event) => {
-    // Si changement alors nouvelles valeurs des otpions lentilles
-    lentilleChoisie = event.target.value;
-    console.log(`lentilleChoisie = ${lentilleChoisie}`)
+    let lentilleChoisie = selectOptionsLentilles.value;    
+    selectOptionsLentilles.addEventListener('change', (event) => {  // Si changement alors nouvelles valeurs des otpions lentilles
+        lentilleChoisie = event.target.value;
+        console.log(`lentilles nouvelles = ${lentilleChoisie}`)
     })
- 
-    // ajouter un article au panier
-    let ajouterPanier = document.querySelector('.ajoutez-panier')
-    ajouterPanier.addEventListener('click', (event) => {
-        let clickCount = 0;
-        console.log(ajouterPanier);
-        clickCount ++;
+    console.log('-------');
 
-        if (clickCount > 1) {
+}
 
-            console.log(`clickCount =  ${clickCount}`);
-            // produit.innerHTML +=  
-            // ` <div class="alert alert-warning alert-dismissible fade show">
-            //     <button type="button" class="close" data-dismiss="alert">&times;</button>
-            //     <strong>Success!</strong> This alert box could indicate a successful or positive action.
-            //   </div>
-            // `
-        }
 
-        let articleChoisie = [name, _id, imageUrl, lentilleChoisie, quantiteChoisie, prixTotal.textContent, price/100];
-        console.log(`articleChoisie =  ${articleChoisie}`);
-        let articleChoisieJSON = JSON.stringify(articleChoisie);
-        localStorage.setItem(lentilleChoisie, articleChoisieJSON);
+// Obtenir les données par page produit 
+document.addEventListener("DOMContentLoaded", () => {
 
-        produit.innerHTML += 
-         ` <div class="alert alert-success alert-dismissible fade show">
-             <button type="button" class="close" data-dismiss="alert">&times;</button>
-             Article <strong>${name}</strong> a bien été ajouté au panier.
-           </div>
-         `
+    let produit_id = window.location.href.match(/[^=]+$/).toString();
+
+    sendXHR('GET', 'http://localhost:3000/api/cameras/'+produit_id)
+    .then(item =>afficherData(item))
+    .catch(errorResponseData => {
+        const error = new Error ("Error in  vitrine rendering");
+        error.data = errorResponseData;
+        throw error;
+    });
+
+});
+
+    // Ajouter un article au panier
+    async function ajouterAuPanier () {
     
+        
+        buttonAjouterPanier.addEventListener('click', (event) => {
+            // let clickCount = 0;
+            // console.log(buttonAjouterPanier);
+            // clickCount ++;
+
+            // if (clickCount > 1) {
+
+            //     console.log(`clickCount =  ${clickCount}`);
+                // produit.innerHTML +=  
+                // ` <div class="alert alert-warning alert-dismissible fade show">
+                //     <button type="button" class="close" data-dismiss="alert">&times;</button>
+                //     <strong>Success!</strong> This alert box could indicate a successful or positive action.
+                //   </div>
+                // `
+            //}
+            let identifiant = name + " | "  + lentilleChoisie;
+            let articleChoisie = [name, _id, imageUrl, lentilleChoisie, quantiteChoisie, prixTotal.textContent, price/100];
+            console.log(`articleChoisie =  ${articleChoisie}`);
+            let articleChoisieJSON = JSON.stringify(articleChoisie);
+            localStorage.setItem(identifiant, articleChoisieJSON);
+
+            console.log(`localStorageLength = `, localStorage.length)
+
+            produit.innerHTML += 
+            ` <div class="alert alert-success alert-dismissible fade show">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                Article <strong>${name}</strong> a bien été ajouté au panier.
+            </div>
+            `
+        });
+    }
+
+ajouterAuPanier();
+
+updatePanierHeader();
+
+//  Back up
+
+
     // alert fadeIn/ fadeOut
     //     produit.innerHTML += ` <div class="alert alert-success" id="success-alert">
     //     <button type="button" class="close" data-dismiss="alert">x</button>
@@ -169,29 +183,3 @@ async function afficherData(data) {
     //           });
     //         });
     //       });
-
-    updatePanierHeader();
-
-
-    });
-
-    console.log(localStorage.length)
-     
-};
-
-
-// Créer EventListener pour obtenir les données produits 
-document.addEventListener("DOMContentLoaded", () => {
-    dataProduit().then(item =>afficherData(item));
-    
-
-});
-
-
-
-
-
-
-
-
-
