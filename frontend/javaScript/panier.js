@@ -44,7 +44,7 @@ async function afficherPanier() {
           }
 
           
-};
+}
 
 document.addEventListener("DOMContentLoaded", () => {
 

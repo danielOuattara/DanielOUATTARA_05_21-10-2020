@@ -2,151 +2,7 @@ import {sendXHR}  from './sendXHR.js'
 import {updatePanierHeader}  from  './updatePanierHeader.js'
 
 
-
-
-// async function filtrationData(responseData) {
-//     let infosProduits = [];
-//     let optionFiltre = document.querySelector('#filtre');
-//     optionFiltre.addEventListener('change', (event) => {
-
-//         console.log(event.target.value) // OK
-//         switch (event.target.value) {
-
-//             case "nomCroissant":
-//                 infosProduits = responseData.sort(function(a, b) {  
-//                     return a.price - b.price  // ordonner les articles par prix croissant
-//                     return infosProduits
-//                 })
-//                 break;
-
-//             case "nomDecroissant":
-//                 infosProduits = responseData.sort(function(a, b) {  
-//                     return b.price - a.price  // ordonner les articles par prix décroissant
-//                     return infosProduits
-//                 })
-//                 break;
-
-//             case "prixCroissant":
-//                 infosProduits = responseData.sort(function(a, b) {  // ordonner les articles par nom croissant
-//                     if (a.name.toLowerCase() < b.name.toLowerCase()) {return -1;}
-//                     if (a.name.toLowerCase() > b.name.toLowerCase()) {return 1;}
-//                     return infosProduits
-//                 })
-//                 break;
-
-//             case "prixDecroissant":
-//                 infosProduits = responseData.sort(function(a, b) {  // ordonner les articles par nom décroissant
-//                     if (a.name.toLowerCase() < b.name.toLowerCase()) {return 1;}
-//                     if (a.name.toLowerCase() > b.name.toLowerCase()) {return -1;}
-//                     return infosProduits
-//                 })
-//                 break;
-            
-//         }
-        
-
-//     });
-   
-
-// }
-
-
-
-
-
-//  Afficher tous les articles en vente
-
-
 async function afficherProduits(responseData) {  
-
-    responseData = responseData.sort(function(a, b) {  
-        return a.price - b.price  // ordonner les articles par prix croissant
-    });
-
-    let optionFiltre = document.querySelector('#filtre');
-    optionFiltre.addEventListener('mouseup', (event) => {
-
-       let  result = event.target.value;
-
-        console.log(event.target.value) // OK
-
-        if (result == "nomCroissant") {
-            responseData = responseData.sort(function(a, b) {  
-                return a.price - b.price  // ordonner les articles par prix croissant  
-            });
-
-        } /*else*/ if (result == "nomDecroissant") {
-            responseData = responseData.sort(function(a, b) {  
-                return a.price - b.price  // ordonner les articles par prix croissant  
-            });
-
-        } /*else*/ if (result == "prixCroissant") {
-            responseData = responseData.sort(function(a, b) {  
-                return a.price - b.price  // ordonner les articles par prix croissant  
-            });
-
-        } /*else*/ if (result == "prixDecroissant") {
-            responseData = responseData.sort(function(a, b) {  
-                return a.price - b.price  // ordonner les articles par prix croissant  
-            });
-        }
-
-        //-----------------------------------
-        // switch (event.target.value) {
-
-        //     case "nomCroissant":
-        //         infosProduits = responseData.sort(function(a, b) {  
-        //             return a.price - b.price  // ordonner les articles par prix croissant  
-        //         })
-
-        //         break;
-
-        //     case "nomDecroissant":
-        //         infosProduits = responseData.sort(function(a, b) {  
-        //             return b.price - a.price  // ordonner les articles par prix décroissant 
-        //         })
-
-        //         break;
-
-        //     case "prixCroissant":
-        //         infosProduits = responseData.sort(function(a, b) {  // ordonner les articles par nom croissant
-        //             if (a.name.toLowerCase() < b.name.toLowerCase()) {return -1;}
-        //             if (a.name.toLowerCase() > b.name.toLowerCase()) {return 1;} 
-        //         })
-
-        //         break;
-
-        //     case "prixDecroissant":
-        //         infosProduits = responseData.sort(function(a, b) {  // ordonner les articles par nom décroissant
-        //             if (a.name.toLowerCase() < b.name.toLowerCase()) {return 1;}
-        //             if (a.name.toLowerCase() > b.name.toLowerCase()) {return -1;} 
-        //         })
-
-        //         break;
-        // }
-
-
-
-
-
-
-      
-
-    });
-
-
-    
-
-    // });
-   
-    // let infosProduits = responseData.sort(function(a, b) {  
-    //     return b.price - a.price  // ordonner les articles par prix croissant
-    // });
-    // let  infosProduits = responseData.sort(function(a, b) {
-    //     if (a.name.toLowerCase() < b.name.toLowerCase()) {return 1;}
-    //     if (a.name.toLowerCase() > b.name.toLowerCase()) {return -1;}
-    // });
-    
     let vitrine = document.querySelector('#vitrine');
     responseData.forEach(article => {
         vitrine.innerHTML += `
@@ -166,34 +22,167 @@ async function afficherProduits(responseData) {
                     </div> `;
         return vitrine;
     });
-};
+}
 
 
-// Opacity 75% des images 'mouseover'
-function imageOpacity () {
+async function imageOpacity () {  // Animation & style des images 'mouseover'
     let imageAffiche = document.querySelectorAll('img');
     for(let i = 0 ; i < imageAffiche.length ; i++) {
         imageAffiche[i].addEventListener('mouseover', function() {
             this.style.opacity ='0.75'
+            this.style.scale ='1.1'
+            this.style.transition ='all 350ms'
         });
         imageAffiche[i].addEventListener('mouseout', function() {
             this.style.opacity ='1'
+            this.style.scale ='1'
         });
     }
 }
 
-document.addEventListener("DOMContentLoaded", () => {  // affichage vitrine au chargement terminé
-    let produitVitrine =[];
-    produitVitrine = sendXHR('GET', 'http://localhost:3000/api/cameras')
-                      /*.then(filtrationData)*/
-                      .then(infoProduits => afficherProduits(infoProduits) ,
-                            errorResponseData => {
-                                const error = new Error ("Error in vitrine rendering");
-                                error.data = errorResponseData;
-                                throw error;
-                      }).then(imageOpacity);
+
+document.addEventListener("DOMContentLoaded", () => { // affichage vitrine au chargement terminé
+    sendXHR('GET', 'http://localhost:3000/api/cameras')
+        .then(infoProduits => afficherProduits(infoProduits) ,
+              errorResponseData => {
+                const error = new Error ("Error in vitrine rendering");
+                error.data = errorResponseData;
+                throw error;
+        }).then(imageOpacity);
 });
 
-updatePanierHeader();
+
+// Filtre des articles affichés. 
+let optionFiltre = document.querySelector('#filtre');
+
+optionFiltre.addEventListener('change', (event) =>  {
+
+    vitrine.innerHTML = "";
+    switch (event.target.value) {
+
+        case "prixCroissant":
+            sendXHR('GET', 'http://localhost:3000/api/cameras')
+                .then(responseData => {
+                        responseData.sort(function(a, b) {  
+                        return a.price - b.price  // ordonner les articles par rix croissant 
+                        })
+                    console.log(responseData);
+                    return responseData;
+                })
+                .then(infoProduits => afficherProduits(infoProduits))
+                .then(imageOpacity);
+            break;
+
+        case "prixDecroissant":
+            sendXHR('GET', 'http://localhost:3000/api/cameras')
+                .then(responseData => {
+                        responseData.sort(function(a, b) {  
+                        return b.price - a.price  // ordonner les articles par rix décroissant 
+                        })
+                    console.log(responseData);
+                    return responseData
+                })
+                .then(infoProduits => afficherProduits(infoProduits))
+                .then(imageOpacity);
+            break;
+
+        case "nomCroissant":
+            sendXHR('GET', 'http://localhost:3000/api/cameras')
+                .then(responseData => {
+                        responseData.sort(function(a, b) {  // ordonner les articles par nom croissant
+                            if (a.name.toLowerCase() < b.name.toLowerCase()) {return -1;}
+                            if (a.name.toLowerCase() > b.name.toLowerCase()) {return 1;} 
+                        })
+                    console.log(responseData);
+                    return responseData
+                })
+                .then(infoProduits => afficherProduits(infoProduits))
+                .then(imageOpacity);
+            break;
+
+        case "nomDecroissant":
+            sendXHR('GET', 'http://localhost:3000/api/cameras')
+                .then(responseData => {
+                        responseData.sort(function(a, b) {  // ordonner les articles par nom decroissant
+                            if (a.name.toLowerCase() < b.name.toLowerCase()) {return 1;}
+                            if (a.name.toLowerCase() > b.name.toLowerCase()) {return -1;} 
+                        })
+                    console.log(responseData);
+                    return responseData
+                })
+                .then(infoProduits => afficherProduits(infoProduits))
+                .then(imageOpacity);
+            break;
+    }
+}); 
+
+updatePanierHeader();  // ATTENTION : Ne pas supprimer !!!!  <<<===========
+
+
+
+
+// A finir ? cause = DRY  juste au dessus
+/*
+( async function filtreData () {
+
+    let optionFiltre = document.querySelector('#filtre');
+
+    optionFiltre.addEventListener('change', (event) =>  {
+
+        vitrine.innerHTML = "";
+        if (event.target.value == "prixCroissant" ) {
+            sendXHR('GET', 'http://localhost:3000/api/cameras')
+                .then(responseData => {
+                        responseData.sort(function(a, b) {  
+                        return a.price - b.price  // ordonner les articles par rix croissant 
+                        })
+                    console.log(responseData);
+                    ;
+                })
+                return responseData
+        }
+
+        if (event.target.value == "prixDecroissant" ) {
+            sendXHR('GET', 'http://localhost:3000/api/cameras')
+                .then(responseData => {
+                        responseData.sort(function(a, b) {  
+                        return b.price - a.price  // ordonner les articles par rix croissant 
+                        })
+                    console.log(responseData);
+                    
+                })
+                return responseData
+        }
+
+        if (event.target.value == "nomCroissant" ) {
+            sendXHR('GET', 'http://localhost:3000/api/cameras')
+                .then(responseData => {
+                        responseData.sort(function(a, b) {  // ordonner les articles par nom croissant
+                            if (a.name.toLowerCase() < b.name.toLowerCase()) {return -1;}
+                            if (a.name.toLowerCase() > b.name.toLowerCase()) {return 1;} 
+                        })
+                    console.log(responseData);
+                    
+                })
+                return responseData
+        }
+
+        if (event.target.value == "nomDecroissant" ) {
+            sendXHR('GET', 'http://localhost:3000/api/cameras')
+                .then(responseData => {
+                        responseData.sort(function(a, b) {  // ordonner les articles par nom croissant
+                            if (a.name.toLowerCase() < b.name.toLowerCase()) {return 1;}
+                            if (a.name.toLowerCase() > b.name.toLowerCase()) {return -1;} 
+                        })
+                    console.log(responseData);
+                    
+                })
+                return responseData
+        }
+    })
+    
+})().then( responseData => afficherProduits(responseData)).then(imageOpacity);
+*/
+
 
 

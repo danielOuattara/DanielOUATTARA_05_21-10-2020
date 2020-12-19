@@ -114,3 +114,29 @@ function filtreAffichage() {
 
         return infosProduits;
 
+// ------------------------------------------------------------------------------------------------
+
+
+
+if (result == "nomCroissant") {
+    responseData = responseData.sort(function(a, b) {  
+        return a.price - b.price  // ordonner les articles par prix croissant  
+    });
+
+} else if (result == "nomDecroissant") {
+    responseData = responseData.sort(function(a, b) {  
+        return a.price - b.price  // ordonner les articles par prix croissant  
+    });
+
+} else if (result == "prixCroissant") {
+    responseData = responseData.sort(function(a, b) {  
+        return a.price - b.price  // ordonner les articles par prix croissant  
+    });
+
+} else if (result == "prixDecroissant") {
+    responseData = responseData.sort(function(a, b) {  
+        return a.price - b.price  // ordonner les articles par prix croissant  
+      });
+   }
+});
+return responseData;
