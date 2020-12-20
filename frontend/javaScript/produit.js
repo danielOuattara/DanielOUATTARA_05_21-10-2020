@@ -2,8 +2,6 @@ import { sendXHR } from './sendXHR.js';
 import { updatePanierHeader } from './updatePanierHeader.js'
 
 
-let buttonAjouterPanier = document.querySelector('.ajoutez-panier')
-
 //let quantiteChoisie = 1; 
 
 async function afficherData(data) {
@@ -19,7 +17,8 @@ async function afficherData(data) {
                                 <div class="modal-dialog modal-xl">
                                 <div class="modal-content">              
                                     <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h3 class="modal-title">${name} </h3>
+                                      <button type="button" class="btn btn-danger" data-dismiss="modal">Fermez</button>
                                     </div>
                                     <img src=${imageUrl} alt="" class="img-thumbnail img-fluid mx-auto d-block">                                         
                                 </div>
@@ -52,15 +51,6 @@ async function afficherData(data) {
                 <div>
             </div>`;
 
-
-    // Opacity 75% des images 
-    let image_2 = document.querySelector('.hover-image')
-    image_2.addEventListener('mouseover', function() {
-        this.style.opacity ='0.75'
-    });
-    image_2.addEventListener('mouseout', function() {
-        this.style.opacity ='1'
-    });
 
 
     // ajustement des options lentilles:
@@ -112,6 +102,27 @@ async function afficherData(data) {
 }
 
 
+
+async function aminationImageProduit() {
+
+        let imageProduit = document.querySelector('.hover-image');
+        console.log(imageProduit);
+
+        imageProduit.addEventListener('mouseover', function() {
+            this.style.opacity ='0.75';
+            this.style.scale ='1.1';
+            this.style.transition ='all 350ms';
+        });
+
+        imageProduit.addEventListener('mouseout', function() {
+            this.style.opacity ='1'
+            this.style.scale ='1'
+        });
+   
+}
+
+
+
 // Obtenir les données par page produit 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -123,10 +134,12 @@ document.addEventListener("DOMContentLoaded", () => {
         const error = new Error ("Error in  vitrine rendering");
         error.data = errorResponseData;
         throw error;
-    });
+    })
+    .then(aminationImageProduit);
 
 });
 
+let buttonAjouterPanier = document.querySelector('.ajoutez-panier')
     // Ajouter un article au panier
     async function ajouterAuPanier () {
     

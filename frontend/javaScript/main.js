@@ -1,8 +1,7 @@
 import {sendXHR}  from './sendXHR.js'
 import {updatePanierHeader}  from  './updatePanierHeader.js'
 
-
-async function afficherProduits(responseData) {  
+async function afficherVitrine(responseData) {  
     let vitrine = document.querySelector('#vitrine');
     responseData.forEach(article => {
         vitrine.innerHTML += `
@@ -15,7 +14,7 @@ async function afficherProduits(responseData) {
                         </div>
                         <div class="flex-fill mx-auto text-center">
                             <h2 class="mb-4 mt-4 display-4"> ${article.name} </h2>
-                            <p>${article.description}</p> 
+                            <p class= ml-2 text-justify>${article.description}</p> 
                             <h4>&Agrave partir de ${article.price/100}€</h4>
                             <a id=${article._id} class="btn btn-info mt-4" href="./produit.html?id=${article._id}">Découvrez nos modèles</a>
                         </div>
@@ -24,8 +23,7 @@ async function afficherProduits(responseData) {
     });
 }
 
-
-async function imageOpacity () {  // Animation & style des images 'mouseover'
+async function imageAnimation() {  // Animation & style des images 'mouseover'
     let imageAffiche = document.querySelectorAll('img');
     for(let i = 0 ; i < imageAffiche.length ; i++) {
         imageAffiche[i].addEventListener('mouseover', function() {
@@ -43,12 +41,12 @@ async function imageOpacity () {  // Animation & style des images 'mouseover'
 
 document.addEventListener("DOMContentLoaded", () => { // affichage vitrine au chargement terminé
     sendXHR('GET', 'http://localhost:3000/api/cameras')
-        .then(infoProduits => afficherProduits(infoProduits) ,
+        .then(infoProduits => afficherVitrine(infoProduits) ,
               errorResponseData => {
                 const error = new Error ("Error in vitrine rendering");
                 error.data = errorResponseData;
                 throw error;
-        }).then(imageOpacity);
+        }).then(imageAnimation);
 });
 
 
@@ -69,8 +67,8 @@ optionFiltre.addEventListener('change', (event) =>  {
                     console.log(responseData);
                     return responseData;
                 })
-                .then(infoProduits => afficherProduits(infoProduits))
-                .then(imageOpacity);
+                .then(infoProduits => afficherVitrine(infoProduits))
+                .then(imageAnimation);
             break;
 
         case "prixDecroissant":
@@ -82,8 +80,8 @@ optionFiltre.addEventListener('change', (event) =>  {
                     console.log(responseData);
                     return responseData
                 })
-                .then(infoProduits => afficherProduits(infoProduits))
-                .then(imageOpacity);
+                .then(infoProduits => afficherVitrine(infoProduits))
+                .then(imageAnimation);
             break;
 
         case "nomCroissant":
@@ -96,8 +94,8 @@ optionFiltre.addEventListener('change', (event) =>  {
                     console.log(responseData);
                     return responseData
                 })
-                .then(infoProduits => afficherProduits(infoProduits))
-                .then(imageOpacity);
+                .then(infoProduits => afficherVitrine(infoProduits))
+                .then(imageAnimation);
             break;
 
         case "nomDecroissant":
@@ -110,8 +108,8 @@ optionFiltre.addEventListener('change', (event) =>  {
                     console.log(responseData);
                     return responseData
                 })
-                .then(infoProduits => afficherProduits(infoProduits))
-                .then(imageOpacity);
+                .then(infoProduits => afficherVitrine(infoProduits))
+                .then(imageAnimation);
             break;
     }
 }); 
@@ -181,7 +179,7 @@ updatePanierHeader();  // ATTENTION : Ne pas supprimer !!!!  <<<===========
         }
     })
     
-})().then( responseData => afficherProduits(responseData)).then(imageOpacity);
+})().then( responseData => afficherVitrine(responseData)).then(imageAnimation);
 */
 
 
