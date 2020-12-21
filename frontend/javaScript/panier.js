@@ -6,7 +6,7 @@ import {updatePanierHeader} from './updatePanierHeader.js';
 
 ;
 
-async function __afficherPanier__() {
+async function afficherPanier() {
   let panierCommande = []
 
      console.log(`localStorage Length = ` , localStorage.length);
@@ -50,7 +50,7 @@ async function __afficherPanier__() {
 
 document.addEventListener("DOMContentLoaded", () => {
 
-  __afficherPanier__();
+  afficherPanier();
 
 });
 
@@ -83,7 +83,7 @@ if(localStorage.length == 0) {
 videurPanier.addEventListener('click', () => {
   localStorage.clear();
   updatePanierHeader();
-  __afficherPanier__();
+  afficherPanier();
   formulaireCommande.style.display = "none";
   videurPanier.style.display = "none";
 });
