@@ -4,17 +4,19 @@ import {updatePanierHeader} from './updatePanierHeader.js';
 
 // Afficher tous les articles choisis dans le panier
 
-let panierCommande = [];
+;
 
-async function afficherPanier() {
+async function __afficherPanier__() {
+  let panierCommande = []
+
      console.log(`localStorage Length = ` , localStorage.length);
      for ( let i = 0; i < localStorage.length; i++) {
-        let clefArticleChoisie = localStorage.key(i);
-        let articlesChoisiesJSON = localStorage.getItem(clefArticleChoisie);
+        let articleChoisieKEY = localStorage.key(i);
+        let articlesChoisiesJSON = localStorage.getItem(articleChoisieKEY);
         let articlesChoisies = JSON.parse(articlesChoisiesJSON);
         panierCommande.push(articlesChoisies);
 
-        console.log(clefArticleChoisie)
+        console.log(articleChoisieKEY)
         console.log(articlesChoisies);
         let listingPanier = document.querySelector('#vitrine');
         listingPanier.innerHTML +=  
@@ -48,7 +50,7 @@ async function afficherPanier() {
 
 document.addEventListener("DOMContentLoaded", () => {
 
-afficherPanier();
+  __afficherPanier__();
 
 });
 
@@ -69,22 +71,25 @@ updatePanierHeader();
 
 // vider panier
 
+let formulaireCommande = document.querySelector('.formulaire-commande');
 let videurPanier = document.querySelector('.vider-panier');
+if(localStorage.length == 0) {
+  videurPanier.style.display = "none";
+  formulaireCommande.style.display = "none";
+  
+}
+
 
 videurPanier.addEventListener('click', () => {
-    localStorage.clear();
-    updatePanierHeader();
-    afficherPanier();
+  localStorage.clear();
+  updatePanierHeader();
+  __afficherPanier__();
+  formulaireCommande.style.display = "none";
+  videurPanier.style.display = "none";
 });
 
 // afficher button : vider-panier
 
-const cacherVideurPanier = () => {
-    if (localStorage.length  == 0 ) {
-        document.querySelector('.vider-panier').style.visibility = "hidden";
-    }
-}
-cacherVideurPanier();
 
 
 // formulaire du contact : code de validation coté client
@@ -105,6 +110,16 @@ cacherVideurPanier();
       });
     }, false);
   })();
+
+
+
+  const cacherVideurPanier = () => {
+    if (localStorage.length  == 0 ) {
+        document.querySelector('.vider-panier').style.visibility = "hidden";
+    }
+}
+cacherVideurPanier();
+
 
 
   // génération de l'objet de commande : les articles + formulaire valide

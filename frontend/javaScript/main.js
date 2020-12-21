@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => { // affichage vitrine au ch
 let optionFiltre = document.querySelector('#filtre');
 
 optionFiltre.addEventListener('change', (event) =>  {
-
+    event.stopPropagation();
     vitrine.innerHTML = "";
     switch (event.target.value) {
 
@@ -64,7 +64,6 @@ optionFiltre.addEventListener('change', (event) =>  {
                         responseData.sort(function(a, b) {  
                         return a.price - b.price  // ordonner les articles par rix croissant 
                         })
-                    console.log(responseData);
                     return responseData;
                 })
                 .then(infoProduits => afficherVitrine(infoProduits))
@@ -77,7 +76,6 @@ optionFiltre.addEventListener('change', (event) =>  {
                         responseData.sort(function(a, b) {  
                         return b.price - a.price  // ordonner les articles par rix décroissant 
                         })
-                    console.log(responseData);
                     return responseData
                 })
                 .then(infoProduits => afficherVitrine(infoProduits))
@@ -91,7 +89,6 @@ optionFiltre.addEventListener('change', (event) =>  {
                             if (a.name.toLowerCase() < b.name.toLowerCase()) {return -1;}
                             if (a.name.toLowerCase() > b.name.toLowerCase()) {return 1;} 
                         })
-                    console.log(responseData);
                     return responseData
                 })
                 .then(infoProduits => afficherVitrine(infoProduits))
@@ -105,7 +102,6 @@ optionFiltre.addEventListener('change', (event) =>  {
                             if (a.name.toLowerCase() < b.name.toLowerCase()) {return 1;}
                             if (a.name.toLowerCase() > b.name.toLowerCase()) {return -1;} 
                         })
-                    console.log(responseData);
                     return responseData
                 })
                 .then(infoProduits => afficherVitrine(infoProduits))
@@ -116,71 +112,6 @@ optionFiltre.addEventListener('change', (event) =>  {
 
 updatePanierHeader();  // ATTENTION : Ne pas supprimer !!!!  <<<===========
 
-
-
-
-// A finir ? cause = DRY  juste au dessus
-/*
-( async function filtreData () {
-
-    let optionFiltre = document.querySelector('#filtre');
-
-    optionFiltre.addEventListener('change', (event) =>  {
-
-        vitrine.innerHTML = "";
-        if (event.target.value == "prixCroissant" ) {
-            sendXHR('GET', 'http://localhost:3000/api/cameras')
-                .then(responseData => {
-                        responseData.sort(function(a, b) {  
-                        return a.price - b.price  // ordonner les articles par rix croissant 
-                        })
-                    console.log(responseData);
-                    ;
-                })
-                return responseData
-        }
-
-        if (event.target.value == "prixDecroissant" ) {
-            sendXHR('GET', 'http://localhost:3000/api/cameras')
-                .then(responseData => {
-                        responseData.sort(function(a, b) {  
-                        return b.price - a.price  // ordonner les articles par rix croissant 
-                        })
-                    console.log(responseData);
-                    
-                })
-                return responseData
-        }
-
-        if (event.target.value == "nomCroissant" ) {
-            sendXHR('GET', 'http://localhost:3000/api/cameras')
-                .then(responseData => {
-                        responseData.sort(function(a, b) {  // ordonner les articles par nom croissant
-                            if (a.name.toLowerCase() < b.name.toLowerCase()) {return -1;}
-                            if (a.name.toLowerCase() > b.name.toLowerCase()) {return 1;} 
-                        })
-                    console.log(responseData);
-                    
-                })
-                return responseData
-        }
-
-        if (event.target.value == "nomDecroissant" ) {
-            sendXHR('GET', 'http://localhost:3000/api/cameras')
-                .then(responseData => {
-                        responseData.sort(function(a, b) {  // ordonner les articles par nom croissant
-                            if (a.name.toLowerCase() < b.name.toLowerCase()) {return 1;}
-                            if (a.name.toLowerCase() > b.name.toLowerCase()) {return -1;} 
-                        })
-                    console.log(responseData);
-                    
-                })
-                return responseData
-        }
-    })
-    
-})().then( responseData => afficherVitrine(responseData)).then(imageAnimation);
-*/
 
 
 

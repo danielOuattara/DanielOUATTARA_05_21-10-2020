@@ -1,7 +1,7 @@
 // cette fonction actualise, dans le header de toutes les pages,
 // le nombre d'articles ainsi que le prix total du panier 
 
-export /*async*/function updatePanierHeader() {
+export async function updatePanierHeader() {
     let nombreArticlesPanier = 0;
     let montantTotalPanier = 0;
 
