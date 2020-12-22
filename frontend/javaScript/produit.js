@@ -131,7 +131,7 @@ function capterPrixTotal(price) {
         prixTotal.innerHTML = event.target.value * (price/100);
         console.log("prix Total = ", prixTotal.innerHTML)
     });
-    return prixTotal.innerHTML;
+    //return prixTotal.innerHTML;
 }
 
 
@@ -197,14 +197,14 @@ document.addEventListener("DOMContentLoaded", () => {
             capterOptionLentilles();
             capterNombreArticleChoisi();
             capterPrixTotal(data.price);
+            ajouterPanierListener();
         })
         .then(animationImageProduit)
         .then(updatePanierHeader)
 });
 
 
-
-window.addEventListener('load', () => {
+function ajouterPanierListener() {
 
     let btnAjouterPanier = document.querySelector('.ajoutez-panier');
 
@@ -249,7 +249,60 @@ window.addEventListener('load', () => {
 
         updatePanierHeader()
     });
-});
+
+
+
+
+
+
+
+}
+// window.addEventListener('load', () => {
+
+    // let btnAjouterPanier = document.querySelector('.ajoutez-panier');
+
+    // btnAjouterPanier.addEventListener('click', () => {
+
+    //     let articleName      = document.querySelector('.article-name');
+    //     let articleID        = document.querySelector('.article-id');
+    //     let articleImageUrl  = document.querySelector('.hover-image');
+    //     let lentilleChoisie  = document.querySelector('.options-lentilles');
+    //     let quantiteChoisie  = document.querySelector('.quantite-article');
+    //     let articlePrix      = document.querySelector('.article-prix');
+    //     let prixTotal        = document.querySelector('#prix-total')
+    //     let clickCount = 0;
+
+    //     let articleChoisie = [ articleName.innerHTML, articleID.innerHTML, articleImageUrl.src, 
+    //         lentilleChoisie.value, quantiteChoisie.value, articlePrix.textContent, prixTotal.textContent];
+
+    //     console.table(articleChoisie);
+    //     clickCount ++;
+
+    //     let articleChoisieKEY = articleName.innerHTML.replace(/\s/, "_")+ "_" + articleID.innerHTML.trim() + "_" + lentilleChoisie.value.replace(/\s/, "_");
+    //     console.log("articleChoisieKEY =" , articleChoisieKEY)
+
+    //     // if (clickCount > 1 && localStorage(articleChoisieKEY) !== undefined) {
+    //     // console.log("Article déjà ajouté")
+    //     // }
+    //     // else {
+
+    //     let articleChoisieJSON = JSON.stringify(articleChoisie);
+    //     localStorage.setItem(articleChoisieKEY, articleChoisieJSON);
+
+    //     console.log("localStorage.length =", localStorage.length)
+
+    //     console.log(localStorage.getItem(articleChoisieKEY));
+
+    //     produit.innerHTML += 
+    //     ` <div class=" ajouter-panier-confirmation alert alert-success alert-dismissible fade show">
+    //     <button type="button" class="close" data-dismiss="alert">&times;</button>
+    //     Article <strong> ${articleName.innerHTML} </strong> a bien été ajouté au panier.
+    //     </div>
+    //     `
+
+    //     updatePanierHeader()
+    // });
+// });
 
 
 

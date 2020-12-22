@@ -1,7 +1,7 @@
 
 import {updatePanierHeader} from './updatePanierHeader.js';
 
-
+//localStorage.clear();
 // Afficher tous les articles choisis dans le panier
 
 function afficherPanier() {
