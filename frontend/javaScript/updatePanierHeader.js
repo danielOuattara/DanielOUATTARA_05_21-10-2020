@@ -11,7 +11,7 @@ export async function updatePanierHeader() {
         let articlesChoisiesJSON = localStorage.getItem(keyArticleChoisie);
         let articlesChoisis = JSON.parse(articlesChoisiesJSON);
 
-console.log(articlesChoisis)
+        //console.log(articlesChoisis)
         nombreArticlesPanier += parseFloat(articlesChoisis[4]);
         montantTotalPanier += parseFloat(articlesChoisis[6]);                
     }

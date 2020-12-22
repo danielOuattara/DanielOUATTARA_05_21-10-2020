@@ -69,60 +69,48 @@
             <div class="form-row">
                 <div class="col-md-4 mb-3">
                     <label for="nom">Nom</label>
-                    <input type="text" class="form-control" id="nom" required />
-                    <div class="valid-feedback">valide </div>
+                    <input type="text" class="form-control" id="nom" required pattern="([a-zA-Z-'+]\s?)+" />
+                    <div class="valid-feedback">Valide !</div>
                 </div>
 
                 <div class="col-md-4 mb-3">
                     <label for="prenom">Prénom</label>
-                    <input type="text" class="form-control" id="prenom" required>
-                    <div class="valid-feedback">Looks good!</div>
+                    <input type="text" class="form-control" id="prenom" required pattern="([a-zA-Z-'+]\s?)+">
+                    <div class="valid-feedback">Valide !</div>
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="email">e-mail</label>
-                    <input type="email" class="form-control" id="email" required>
-                    <div class="valid-feedback">Looks good!</div>
+                    <input type="email" class="form-control" id="email" required pattern="^\w+@[a-zA-Z_]+?(\.[a-zA-Z]{2,4})+$">
+                    <div class="valid-feedback">Valide !</div>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="col-md-4 mb-3">
                     <label for="adresse">Adresse (Numéro & voie ou autres)</label>
-                    <input type="text" class="form-control" id="adresse" required />
-                    <div class="invalid-feedback">valide </div>
+                    <input type="text" class="form-control" id="adresse" required pattern="(\w-',:+]\s?)+" />
+                    <div class="valid-feedback">Valide !</div>
                 </div>
 
                 <div class="col-md-4 mb-3">
                     <label for="code-postale">Code Postale</label>
-                    <input type="text" class="form-control" id="code-postale" pattern="[0-9]{5}" required >
-                    <div class="valid-feedback">Looks good!</div>
+                    <input type="text" class="form-control" id="code-postale" pattern="[0-9]{5}" required />
+                    <div class="valid-feedback">Valide !</div>
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="ville">Ville</label>
-                    <input type="text" class="form-control" id="ville" required>
-                    <div class="valid-feedback">Looks good!</div>
+                    <input type="text" class="form-control" id="ville" required pattern="([a-zA-Z-',:+]\s?){2,}">
+                    <div class="valid-feedback">Valide !</div>
                 </div>
-            </div>
-
-            <div class="form-row">
-                <div class="col-md-4 mb-3">
-                    <label for="pays">Pays</label>
-                    <input type="text" class="form-control" id="pays" required />
-                    <div class="invalid-feedback">valide </div>
-                </div>
-                <div class="col-md-8 mb-3">
-                    <label for="commentaires">Vos commentaires</label>
-                    <textarea class="form-control" id="commentaires" rows="3" placeholder="Précisez ici toutes les autres informations utiles pour votre commande..."></textarea>
-                  </div>
             </div>
 
             <div class="form-group">
 
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-                <label class="form-check-label" for="invalidCheck"> Vous acceptez les Condtions Générale de Vente </label>
-                <div class="invalid-feedback">Vous êtes invité à accepter les CGV en cochant la case ci-contre.</div>
-            </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="check" required>
+                    <label class="form-check-label" for="check"> Vous acceptez les Condtions Générale de Vente </label>
+                    <div class="invalid-feedback">Vous êtes invité à accepter les CGV en cochant la case ci-contre.</div>
+                </div>
             </div>
             <button class="btn btn-primary" type="submit">Confirmez votre commande</button>
         </form>
