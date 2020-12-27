@@ -25,6 +25,7 @@ function afficherVitrine(responseData) {
     });
 }
 
+
 function imageAnimation() {  // Animation & style des images 'mouseover'
     let imageAffiche = document.querySelectorAll('img');
     for(let i = 0 ; i < imageAffiche.length ; i++) {

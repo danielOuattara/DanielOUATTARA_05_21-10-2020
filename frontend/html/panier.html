@@ -60,7 +60,7 @@
                     
                         <!-- Modal Header -->
                         <div class="modal-header">
-                            <h4 class="modal-title ml-5">Voulez-vous vider votre panier ?</h4>
+                            <h4 class="modal-title">Voulez-vous vider votre panier ?</h4>
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                         </div>
                     
@@ -68,8 +68,33 @@
                         <div class="modal-body">
                             <p class="text-center">Si Oui, vous serez alors rediriger vers la boutique...</p><hr>
                             <div class="d-flex flex-column flex-md-row justify-content-md-around m-5">
-                                <a href="./index.html" class=" vider-panier-ok btn btn-danger col-md-3" data-dismiss="modal"> Oui </a>
-                                <button type="button" class="btn btn-success col-md-3" data-dismiss="modal">Non</button>
+                                <button type="button" class="btn btn-success m-2 m-md-0 col-md-3" data-dismiss="modal">Non</button>
+                                <a href="./index.html" class=" vider-panier-ok btn btn-danger m-2 m-md-0 col-md-3" data-dismiss="modal"> Oui </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+
+            <!-- The Modal -->
+            <div class="modal fade" id="supprimer-article-modal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h5 class="modal-title">Supprimer l'article de votre panier ?</h5>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                    
+                     <!-- Modal body -->
+                        <div class="modal-body">
+                            <div class="d-flex flex-column flex-md-row justify-content-md-around m-5">
+                                <button type="button" class="btn btn-success m-2 m-md-0 col-md-3" data-dismiss="modal">Non</button>
+                                <button type="button" class="supprimer-article-ok btn btn-danger m-2 m-md-0 col-md-3" data-dismiss="modal"> Oui </button>
                             </div>
                         </div>
                     </div>

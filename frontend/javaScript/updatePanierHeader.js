@@ -27,8 +27,11 @@ export async function updatePanierHeader() {
 
     if(localStorage.length == 0 ) {
        lienHrefPanier.href = "";
+       lienHrefPanier.addEventListener("click", function() {
+           
+       })
     } else {
-        lienHrefPanier.href= "./panier.html";
+        lienHrefPanier.href = "./panier.html";
     }
 }
 

@@ -182,7 +182,7 @@ function ajouterAuPanier(data) {
         let quantiteChoisie  = document.querySelector('.quantite-article');
         let articlePrix      = document.querySelector('.article-prix');
         let prixTotal        = document.querySelector('#prix-total')
-        let clickCount = 0;
+        // let clickCount = 0;
 
         // creer un array qui stocke les données précédentes
         let articleChoisie = [ articleName.innerHTML, articleID, articleImageUrl.src, 

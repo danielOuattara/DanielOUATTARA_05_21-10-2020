@@ -16,7 +16,7 @@ function afficherPanier() {
         let listingPanier = document.querySelector('#vitrine');
         listingPanier.innerHTML +=  
                         `
-                        <div class="d-flex flex-row border-top  border-3 border-info border-5 my-3 flex-md-row articles ">
+                        <div class="d-flex flex-row border-top border-3 border-info border-5 my-3 flex-md-row articles ">
                            <div class="">
                               <a href="./produit.html?id=${articleChoisie[1]}" >
                                   <img src=${articleChoisie[2]} width=300 alt="oricono oricamera  ${name}image ${articleChoisie[0]}" 
@@ -30,9 +30,9 @@ function afficherPanier() {
                                     <span>Quantite choisie : ${articleChoisie[4]} </span>
                                     <p><i class="far fa-minus-square btn"></i> &nbsp;<i class="far fa-plus-square btn"></i></p>
                                 </div>
-                                <p>Prix Unitaire :  ${articleChoisie[6]}€</p>
-                                <p>Prix Total :  ${articleChoisie[5]}€</p>
-                                <button class="btn btn-info mt-4 retirer-article">Supprimez article</button>
+                                <p>Prix Unitaire :  ${articleChoisie[5]}€</p>
+                                <p>Prix Total :  ${articleChoisie[6]}€</p>
+                                <button class="btn btn-info mt-4 retirer-article" data-toggle="modal" data-target="#supprimer-article-modal">Supprimez article</button>
                             </div>
                         </div>
                         `;
@@ -47,6 +47,7 @@ window.addEventListener("load", () => {
   afficherPanier();
   updatePanierHeader();
   viderPanier();
+  retirerArticlePanier();
 
 });
 
@@ -56,12 +57,12 @@ window.addEventListener("load", () => {
 
 function retirerArticlePanier() {
 
-  let retirerArticle = document.querySelector('.retirer-article');
+  let supprimerArticle = document.querySelector('.supprimer-article-ok');
 
-  retirerArticle.addEventListener('click', () => {
+  supprimerArticle.addEventListener('click', () => {
 
-
-
+    supprimerArticle.parentNode.parentNode.innerHTML= "";
+    
   });
 
   if (localStorage.length !== 0 ) {
@@ -87,7 +88,8 @@ function retirerArticlePanier() {
 
     videurPanier.addEventListener('click', () => {
         localStorage.clear();
-         updatePanierHeader();
+        updatePanierHeader();
+        afficherPanier();
     });
 
  }
