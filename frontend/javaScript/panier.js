@@ -27,7 +27,7 @@ function afficherPanier() {
                                 <h2 class="mb-4 mt-4"> ${articleChoisie[0]} </h2> 
                                 <p>Lentilles Choisie :  ${articleChoisie[3]}</p>
                                 <div>
-                                    <span>Quantite choisie : ${articleChoisie[4]} </span>
+                                    <p>Quantite choisie : <span class= "quantite-choisie">${articleChoisie[4]} </span></p>
                                     <p><i class="far fa-minus-square btn"></i> &nbsp;<i class="far fa-plus-square btn"></i></p>
                                 </div>
                                 <p>Prix Unitaire :  ${articleChoisie[5]}€</p>
@@ -42,14 +42,6 @@ function afficherPanier() {
 }
 
 
-window.addEventListener("load", () => {
-
-  afficherPanier();
-  updatePanierHeader();
-  viderPanier();
-  retirerArticlePanier();
-
-});
 
 
 // supprimer article
@@ -76,6 +68,34 @@ function retirerArticlePanier() {
 
 // ajuster (+ / -) quantité article et prix total
 //------------------------------------------------
+
+function ajusterQuantite() {
+
+  let quantiteChoisie = document.querySelector('.quantite-choisie'); 
+
+  let reduire = document.querySelector('.fa-minus-square');
+  reduire.addEventListener('click', function(event) {
+    console.log("Hello");
+    if (quantiteChoisie.innerHTML < 0) {
+      event.stopPropagation();
+      event.preventDefault();
+
+    } else {
+    quantiteChoisie.innerHTML -=1;
+    }
+
+
+
+  });
+
+
+  let augmenter = document.querySelector('.fa-plus-square');
+  augmenter.addEventListener('click', function(event) {
+
+    quantiteChoisie.innerHTML +=1;
+  });
+
+}
 
 
 
@@ -148,6 +168,21 @@ let products = [];
 
 
 
+
+
+
+
+
+
+window.addEventListener("load", () => {
+
+  afficherPanier();
+  updatePanierHeader();
+  viderPanier();
+  retirerArticlePanier();
+  ajusterQuantite();
+
+});
 
 
 
