@@ -1,6 +1,8 @@
 import {sendXHR}  from './sendXHR.js'
 import {updatePanierHeader}  from  './updatePanierHeader.js'
 
+
+
 function afficherVitrine(responseData) {  
     let vitrine = document.querySelector('#vitrine');
     responseData.forEach(article => {

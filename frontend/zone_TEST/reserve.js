@@ -67,3 +67,33 @@
 //        // console.log("prix Total = ", prixTotal.innerHTML)
 //     });    
 // }
+
+
+//------------------------------------------------------------------------------------------------
+
+   //     produit.innerHTML += 
+    //     ` <div class=" ajouter-panier-confirmation alert alert-success alert-dismissible fade show">
+    //     <button type="button" class="close" data-dismiss="alert">&times;</button>
+    //     Article <strong> ${articleName.innerHTML} </strong> a bien été ajouté au panier.
+    //     </div>
+    //     `
+
+    //     updatePanierHeader()
+    // });
+// });
+
+//  Back up
+    // alert fadeIn/ fadeOut
+    //     produit.innerHTML += ` <div class="alert alert-success" id="success-alert">
+    //     <button type="button" class="close" data-dismiss="alert">x</button>
+    //     <strong>Success! </strong> Product have added to your wishlist.
+    //   </div>`
+    //     $(document).ready(function() {
+    //         $("#success-alert").hide();
+    //         $("#myWish").click(function showAlert() {
+    //           $("#success-alert").fadeTo(2000, 500).slideUp(500, function() {
+    //             $("#success-alert").slideUp(500);
+    //           });
+    //         });
+    //       });
+//------------------------------------------------------------------------------------------------

@@ -1,7 +1,8 @@
-// cette fonction actualise, dans le header de toutes les pages,
-// le nombre d'articles ainsi que le prix total du panier 
+// cette fonction actualise le header de toutes les pages,
 
 export async function updatePanierHeader() {
+
+    // udapte contenu et prix total dans le header
     let nombreArticlesPanier = 0;
     let montantTotalPanier = 0;
 
@@ -18,4 +19,17 @@ export async function updatePanierHeader() {
 
     document.querySelector('.contenu-panier').innerHTML = nombreArticlesPanier;
     document.querySelector('.montant-panier').innerHTML = montantTotalPanier + "€"; 
+
+
+
+    // update disponibilité du lien vers panier
+    let lienHrefPanier = document.querySelector('.lien-vers-panier');
+
+    if(localStorage.length == 0 ) {
+       lienHrefPanier.href = "";
+    } else {
+        lienHrefPanier.href= "./panier.html";
+    }
 }
+
+

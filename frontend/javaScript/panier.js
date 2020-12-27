@@ -1,7 +1,7 @@
 
 import {updatePanierHeader} from './updatePanierHeader.js';
 
-//localStorage.clear();
+
 // Afficher tous les articles choisis dans le panier
 
 function afficherPanier() {
@@ -16,14 +16,14 @@ function afficherPanier() {
         let listingPanier = document.querySelector('#vitrine');
         listingPanier.innerHTML +=  
                         `
-                        <div class="jumbotron d-flex flex-column flex-md-row articles">
-                           <div class="flex-fill">
+                        <div class="d-flex flex-row border-top  border-3 border-info border-5 my-3 flex-md-row articles ">
+                           <div class="">
                               <a href="./produit.html?id=${articleChoisie[1]}" >
                                   <img src=${articleChoisie[2]} width=300 alt="oricono oricamera  ${name}image ${articleChoisie[0]}" 
                                        class="img-thumbnail mx-auto d-block">
                               </a>
                             </div>
-                            <div class="flex-fill mx-auto text-center">
+                            <div class=" mx-auto text-center">
                                 <h2 class="mb-4 mt-4"> ${articleChoisie[0]} </h2> 
                                 <p>Lentilles Choisie :  ${articleChoisie[3]}</p>
                                 <div>
@@ -32,34 +32,37 @@ function afficherPanier() {
                                 </div>
                                 <p>Prix Unitaire :  ${articleChoisie[6]}€</p>
                                 <p>Prix Total :  ${articleChoisie[5]}€</p>
-                                <button class="btn btn-info mt-4 supprimer-article">Supprimez article</button>
+                                <button class="btn btn-info mt-4 retirer-article">Supprimez article</button>
                             </div>
-                            <div class="d-md-flex justify-content-between text-center">
-                            <div>
                         </div>
                         `;
-          }
+      }
 
     // return panierCommande    
 }
 
+
 window.addEventListener("load", () => {
 
   afficherPanier();
+  updatePanierHeader();
+  viderPanier();
 
 });
-
-updatePanierHeader();
-
-
 
 
 // supprimer article
 //-------------------
 
-function supprimerReferenceArticle() {
+function retirerArticlePanier() {
 
-  let supprimerArticle = document.querySelector('.supprimer-article');
+  let retirerArticle = document.querySelector('.retirer-article');
+
+  retirerArticle.addEventListener('click', () => {
+
+
+
+  });
 
   if (localStorage.length !== 0 ) {
       supprimerArticle.addEventListener('click', () => {
@@ -75,37 +78,19 @@ function supprimerReferenceArticle() {
 
 
 
-
-
 // vider panier
 //------------------
 
-function viderPanier() {
+ function viderPanier() {
 
-  let formulaireCommande = document.querySelector('.formulaire-commande');
-  let videurPanier = document.querySelector('.vider-panier');
-  if(localStorage.length == 0) {
-    videurPanier.style.display = "none";
-    formulaireCommande.style.display = "none";
-  }
+    let videurPanier = document.querySelector('.vider-panier-ok');
 
+    videurPanier.addEventListener('click', () => {
+        localStorage.clear();
+         updatePanierHeader();
+    });
 
-  videurPanier.addEventListener('click', () => {
-      localStorage.clear();
-      updatePanierHeader();
-      afficherPanier();
-      formulaireCommande.style.display = "none";
-      videurPanier.style.display = "none";
-  });
-
-}
-
-
-// afficher button : vider-panier
-//----------------------------------
-
-
-
+ }
 
 
 // formulaire du contact : code de validation coté client
