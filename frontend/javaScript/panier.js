@@ -29,9 +29,9 @@ function afficherPanier() {
                             <div class=" mx-auto text-center">
                                 <h2 class="mb-4 mt-4"> ${articleChoisie[0]} </h2> 
                                 <p>Lentilles Choisie :  ${articleChoisie[3]}</p>
-                                <div>
+                                <div class ="gestion-quantite">
                                     <p>Quantite choisie : <span class= "quantite-choisie">${articleChoisie[4]} </span></p>
-                                    <p><i class="far fa-minus-square btn"></i> &nbsp;<i class="far fa-plus-square btn"></i></p>
+                                    <p><i class="far fa-minus-square btn" data-id="${i}"></i> &nbsp;<i class="far fa-plus-square btn" data-id="${i}"></i></p>
                                 </div>
                                 <p>Prix Unitaire :  ${articleChoisie[5]}€</p>
                                 <p>Prix Total :  ${articleChoisie[5] * articleChoisie[4]} €</p>
@@ -70,26 +70,29 @@ function supprimerArticlePanier() {
 //------------------------------------------------
 
 function ajusterQuantite() {
-  if( localStorage.length !==0) {
+  if( localStorage.length !== 0) {
 
-    let quantiteChoisie = document.querySelector('.quantite-choisie'); 
-    let reduire = document.querySelector('.fa-minus-square');
-    reduire.addEventListener('click', function(event) {
-      console.log("Hello");
-      if (quantiteChoisie.innerHTML <= 0) {
-        event.stopPropagation();
-        event.preventDefault();
+    let articles = document.querySelectorAll('.gestion-quantite'); 
 
-      } else {
-      quantiteChoisie.innerHTML --;
-      }
-    });
-
-
-    let augmenter = document.querySelector('.fa-plus-square');
-    augmenter.addEventListener('click', function(event) {
-
-      quantiteChoisie.innerHTML ++;
+    articles.forEach( blocGestion => {
+      console.log("blocGestion = ", blocGestion);
+      let reduire = blocGestion.querySelector('.fa-minus-square');
+      reduire.addEventListener('click', function(event) {
+        console.log("Hello");
+        if (blocGestion.querySelector('.quantite-choisie').innerHTML <= 0) {
+          event.stopPropagation();
+          event.preventDefault();
+  
+        } else {
+        blocGestion.querySelector('.quantite-choisie').innerHTML --;
+        console.log(event.target.dataset.id);
+        }
+      });
+      let augmenter = blocGestion.querySelector('.fa-plus-square');
+      augmenter.addEventListener('click', function(event) {
+  
+        blocGestion.querySelector('.quantite-choisie').innerHTML ++;
+      })
     });
   }
 
