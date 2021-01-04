@@ -52,8 +52,7 @@
     <main>
 
         <div class="container">
-
-            <!-- The Modal -->
+            <!-- The Modal : vider le panier -->
             <div class="modal fade" id="vider-panier-modal">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -66,10 +65,10 @@
                     
                      <!-- Modal body -->
                         <div class="modal-body">
-                            <p class="text-center">Si Oui, vous serez alors rediriger vers la boutique...</p><hr>
+                            <p class="text-center">Si Oui, vous serez alors rediriger vers la boutique...</p>
                             <div class="d-flex flex-column flex-md-row justify-content-md-around m-5">
                                 <button type="button" class="btn btn-success m-2 m-md-0 col-md-3" data-dismiss="modal">Non</button>
-                                <a href="./index.html" class=" vider-panier-ok btn btn-danger m-2 m-md-0 col-md-3" data-dismiss="modal"> Oui </a>
+                                <a href="./index.html" class="vider-panier-ok btn btn-danger m-2 m-md-0 col-md-3"> Oui </a>
                             </div>
                         </div>
                     </div>
@@ -77,9 +76,9 @@
             </div>
         </div>
 
-        <div class="container">
 
-            <!-- The Modal -->
+        <div class="container">
+            <!-- The Modal : supprimer un article !-->
             <div class="modal fade" id="supprimer-article-modal">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -113,6 +112,30 @@
          </div>
 
     
+
+        <div class="container">
+        <!-- The Modal : confirmation commande !-->
+        <div class="modal fade" id="confirmer-commande-modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h5 class="modal-title">Confirmez votre commande ?</h5>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div class="d-flex flex-column flex-md-row justify-content-md-around m-5">
+                            <button type="button" class="btn btn-danger m-2 m-md-0 col-md-3" data-dismiss="modal">Non</button>
+                            <button type="button" class="confirmer-commande-ok btn btn-success m-2 m-md-0 col-md-3" data-dismiss="modal"> Oui </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="container border rounded border-dark p-5 formulaire-commande">
         <h2>Formulaire de commande</h2>
 
@@ -127,7 +150,7 @@
 
                 <div class="col-md-4 mb-3">
                     <label for="prenom">Prénom</label>
-                    <input type="text" class="form-control" id="prenom" required pattern="([a-zA-Z-'+]\s?)+">
+                    <input type="text" class="form-control" id="prenom" required pattern="([a-zA-Z-']\s?)+">
                     <div class="valid-feedback">Valide !</div>
                 </div>
                 <div class="col-md-4 mb-3">
@@ -140,7 +163,7 @@
             <div class="form-row">
                 <div class="col-md-4 mb-3">
                     <label for="adresse">Adresse (Numéro & voie ou autres)</label>
-                    <input type="text" class="form-control" id="adresse" required pattern="(\w-',:+]\s?)+" />
+                    <input type="text" class="form-control" id="adresse" required pattern="([a-zA-Z0-9-']\s?)+" />
                     <div class="valid-feedback">Valide !</div>
                 </div>
 
@@ -164,7 +187,7 @@
                     <div class="invalid-feedback">Vous êtes invité à accepter les CGV en cochant la case ci-contre.</div>
                 </div>
             </div>
-            <button class="btn btn-primary" type="submit">Confirmez votre commande</button>
+            <button class="btn btn-primary confirmation-commande" data-toggle="modal" data-target="#confirmer-commande-modal" type="sumbit">Confirmez votre commande</button>
         </form>
     
     </div>

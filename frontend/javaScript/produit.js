@@ -111,7 +111,6 @@ function capterNombreArticleChoisi() {
 
     let selectQuantiteArticles = document.querySelector('.quantite-article');
     let quantiteChoisie = selectQuantiteArticles.value;
-    console.log('quantité choisie = ', quantiteChoisie)
     selectQuantiteArticles.addEventListener('change', (event) => {  // Si changement alors nouvelles valeurs quantite et €
         quantiteChoisie = event.target.value;
     })
@@ -127,10 +126,6 @@ function capterPrixTotal(price) {
         prixTotal.innerHTML = event.target.value * (price/100);
     });
 }
-
-console.log("localStorage.length =", localStorage.length)
-
-
 
 
 function controlerButtonAllerPanier() {
@@ -152,7 +147,6 @@ document.addEventListener("DOMContentLoaded", () => {
     sendXHR('GET', 'http://localhost:3000/api/cameras/'+produit_id)
         
         .then(data => {
-            console.log(data);
             afficherData(data);
             creationOptionLentilles(data.lenses);
             creationOptionQuantite();
@@ -182,11 +176,12 @@ function ajouterAuPanier(data) {
         let quantiteChoisie  = document.querySelector('.quantite-article');
         let articlePrix      = document.querySelector('.article-prix');
         let prixTotal        = document.querySelector('#prix-total')
-        // let clickCount = 0;
+        let clickCount = 0;
 
         // creer un array qui stocke les données précédentes
         let articleChoisie = [ articleName.innerHTML, articleID, articleImageUrl.src, 
                                lentilleChoisie.value, quantiteChoisie.value, articlePrix.textContent, prixTotal.textContent];
+        console.log(articleChoisie);
 
         // creer un nom  de clef pour localStorage
         let articleChoisieKEY = articleName.innerHTML.replace(/\s/, "_")+ "_" + articleID.trim() + "_" + lentilleChoisie.value.replace(/\s/, "_");
@@ -202,5 +197,6 @@ function ajouterAuPanier(data) {
         capterOptionLentilles();
         capterNombreArticleChoisi();
         capterPrixTotal(data.price);
+        ajouterAuPanier(data);
     });
 }

@@ -4,6 +4,11 @@ import {updatePanierHeader}  from  './updatePanierHeader.js'
 
 
 function afficherVitrine(responseData) {  
+
+    responseData.sort(function(a, b) {  
+        return a.price - b.price  // ordonner les articles par prix croissant 
+    });
+
     let vitrine = document.querySelector('#vitrine');
     responseData.forEach(article => {
         vitrine.innerHTML += `
