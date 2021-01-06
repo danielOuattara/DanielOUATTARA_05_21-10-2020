@@ -106,17 +106,7 @@ function ajusterQuantite() {
         } else {
 
           item.querySelector('.quantite-choisie').innerHTML -- ; 
-          updateAffichagePanier(event.target.dataset.id, item.querySelector('.quantite-choisie'), item.querySelector('.prix-total'));
-
-
-          // let articleChoisieKEY = localStorage.key(event.target.dataset.id);  // ici modifie le localStorage pour l'element cliqué
-          // let articleChoisieJSON = localStorage.getItem(articleChoisieKEY);          
-          // let articleChoisie = JSON.parse(articleChoisieJSON);
-          // articleChoisie[4] = item.querySelector('.quantite-choisie').innerHTML;          
-          // articleChoisie[6] =  parseFloat(articleChoisie[4]) * parseFloat (articleChoisie[5]);
-          // item.querySelector('.prix-total').innerHTML = articleChoisie[6];
-          // articleChoisieJSON = JSON.stringify(articleChoisie);
-          // localStorage.setItem(articleChoisieKEY, articleChoisieJSON);         
+          updateAffichagePanier(event.target.dataset.id, item.querySelector('.quantite-choisie'), item.querySelector('.prix-total'));       
         }  
         updatePanierHeader(); 
       });
@@ -127,24 +117,12 @@ function ajusterQuantite() {
 
         item.querySelector('.quantite-choisie').innerHTML ++;
         updateAffichagePanier(event.target.dataset.id, item.querySelector('.quantite-choisie'), item.querySelector('.prix-total'));
-
-
-        // let articleChoisieKEY = localStorage.key(event.target.dataset.id); // ici modifier le localStorage sur l'element cliqué
-        // let articleChoisieJSON = localStorage.getItem(articleChoisieKEY);
-        // let articleChoisie = JSON.parse(articleChoisieJSON);
-        // articleChoisie[4] = item.querySelector('.quantite-choisie').innerHTML;
-        // articleChoisie[6] =  parseFloat(articleChoisie[4]) *  parseFloat (articleChoisie[5]);
-        // item.querySelector('.prix-total').innerHTML = articleChoisie[6];
-        // articleChoisieJSON = JSON.stringify(articleChoisie);
-        // localStorage.setItem(articleChoisieKEY, articleChoisieJSON);
         updatePanierHeader(); 
      })
     });
   }
   // afficherPanier();
 }
-
-
 
 function updateAffichagePanier( foo, boo, doo) {
   let articleChoisieKEY = localStorage.key(foo);  // ici modifie le localStorage pour l'element cliqué
@@ -155,7 +133,6 @@ articleChoisie[6] =  parseFloat(articleChoisie[4]) * parseFloat (articleChoisie[
 doo.innerHTML = articleChoisie[6];
 articleChoisieJSON = JSON.stringify(articleChoisie);
 localStorage.setItem(articleChoisieKEY, articleChoisieJSON);  
-
 }
 
 
