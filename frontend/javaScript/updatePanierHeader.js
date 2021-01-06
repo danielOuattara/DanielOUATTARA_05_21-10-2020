@@ -8,9 +8,10 @@ export async function updatePanierHeader() {
 
     for (let i = 0 ; i < localStorage.length; i++) {
 
-        let keyArticleChoisie = localStorage.key(i);
-        let articlesChoisiesJSON = localStorage.getItem(keyArticleChoisie);
-        let articlesChoisis = JSON.parse(articlesChoisiesJSON);
+        let keyArticleChoisi = localStorage.key(i);
+        let articlesChoisisJSON = localStorage.getItem(keyArticleChoisi);
+        let articlesChoisis = JSON.parse(articlesChoisisJSON);
+        console.log("articlesChoisis = ", articlesChoisis);
 
         //console.log(articlesChoisis)
         nombreArticlesPanier += parseFloat(articlesChoisis[4]);
@@ -27,9 +28,7 @@ export async function updatePanierHeader() {
 
     if(localStorage.length == 0 ) {
        lienHrefPanier.href = "";
-       lienHrefPanier.addEventListener("click", function() {
-           
-       })
+       lienHrefPanier.style.cursor = "not-allowed";
     } else {
         lienHrefPanier.href = "./panier.html";
     }

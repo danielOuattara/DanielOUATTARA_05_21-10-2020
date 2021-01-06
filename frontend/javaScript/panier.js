@@ -3,98 +3,158 @@ import {updatePanierHeader} from './updatePanierHeader.js';
 import {sendXHR} from './sendXHR.js';
 
 // Afficher tous les articles choisis dans le panier
-
+// localStorage.clear();
 function afficherPanier() {
-
-  //  console.log(localStorage.getItem(articleChoisie));
-
+        console.log("localStorage.length  = ", localStorage.length)
      for ( let i = 0; i < localStorage.length; i++) {
-        let articleChoisieKEY = localStorage.key(i);
-        // console.log(articleChoisieKEY);
-        let articleChoisieJSON = localStorage.getItem(articleChoisieKEY);
-        let articleChoisie = JSON.parse(articleChoisieJSON);
-        // console.log(articleChoisie);
-        // panierCommande.push(articleChoisie);
 
-        let listingPanier = document.querySelector('#vitrine');
+
+        let articleChoisiKEY    = localStorage.key(i);
+        console.log(" articleChoisiKEY = ", articleChoisiKEY)
+        let articleChoisiJSON   = localStorage.getItem(articleChoisiKEY);
+        console.log("articleChoisiJSON = ", articleChoisiJSON)
+        let articleChoisi       = JSON.parse(articleChoisiJSON);
+        let listingPanier       = document.querySelector('#vitrine');
         listingPanier.innerHTML +=  
                         `
-                        <div class="d-flex flex-row border-top border-3 border-info border-5 my-3 flex-md-row articles ">
+                        <div class="donnees-article d-flex flex-row border-bottom border-top border-3 border-info border-5 py-3 flex-md-row articles ">
                            <div class="">
-                              <a href="./produit.html?id=${articleChoisie[1]}" >
-                                  <img src=${articleChoisie[2]} width=300 alt="oricono oricamera image ${articleChoisie[0]}" 
+                              <a href="./produit.html?id=${articleChoisi[1]}" >
+                                  <img src=${articleChoisi[2]} width=300 alt="oricono oricamera image ${articleChoisi[0]}" 
                                        class="img-thumbnail mx-auto d-block">
                               </a>
                             </div>
                             <div class=" mx-auto text-center">
-                                <h2 class="mb-4 mt-4"> ${articleChoisie[0]} </h2> 
-                                <p>Lentilles Choisie :  ${articleChoisie[3]}</p>
-                                <div class ="gestion-quantite">
-                                    <p>Quantite choisie : <span class= "quantite-choisie">${articleChoisie[4]} </span></p>
+                                <h2 class="mb-4 mt-4"> ${articleChoisi[0]} </h2> 
+                                <p>Lentilles Choisie :  ${articleChoisi[3]}</p>
+                                <div class ="gestion-quantite-article">
+                                    <p>Quantite choisie : <span class= "quantite-choisie">${articleChoisi[4]} </span></p>
                                     <p><i class="far fa-minus-square btn" data-id="${i}"></i> &nbsp;<i class="far fa-plus-square btn" data-id="${i}"></i></p>
+                                    <p>Prix Unitaire :  ${articleChoisi[5]}€</p>
+                                    <p>Prix Total : <span class="prix-total" data-id="${i}">${articleChoisi[5] * articleChoisi[4]}</span> €</p>
                                 </div>
-                                <p>Prix Unitaire :  ${articleChoisie[5]}€</p>
-                                <p>Prix Total :  ${articleChoisie[5] * articleChoisie[4]} €</p>
-                                <button class=" supprimer-article-${i} btn btn-warning mt-4 retirer-article" data-toggle="modal" data-target="#supprimer-article-modal">Supprimez article</button>
+                                <button data-id="${i}" class="supprimer-article btn btn-warning mt-4" data-toggle="modal" data-target="#supprimer-article-modal">Supprimez article</button>
                             </div>
                         </div>
                         `;
-      }
-
-    // return panierCommande    
+      }  
 }
 
-
-
-// supprimer article
+// supprimer article : (OK!)
 //-------------------
 
 function supprimerArticlePanier() {
 
-  let supprimerArticle = document.querySelector('.supprimer-article-ok');
+  if (localStorage.length !== 0) {
 
-  supprimerArticle.addEventListener('click', function(event) {
-    this.parentNode.parentNode.innerHTML= "";
+      let supprimerArticleOk = document.querySelector('.supprimer-article-ok');
+      let supprimerArticle = document.querySelectorAll('.supprimer-article');
 
-    if (localStorage.length !== 0 ) {
-      localStorage.removeItem(this.key);
+      supprimerArticle.forEach ( item => {
+
+        item.addEventListener('click', function() {
+
+          supprimerArticleOk.addEventListener('click', () => {
+
+            let articleChoisieKEY = localStorage.key(item.dataset.id);
+            localStorage.removeItem(articleChoisieKEY);
+            item.parentElement.parentElement.remove();
+            console.log(localStorage.length);
+            updatePanierHeader();
+
+            if (localStorage.length == 0) {
+              window.location.replace("./../html/index.html")
+            }
+          });
+        });
+      });
+  }
 }
-    
-  });
-
-}
-
 
 
 // ajuster (+ / -) quantité article et prix total
 //------------------------------------------------
-
 function ajusterQuantite() {
+
   if( localStorage.length !== 0) {
 
-    let articles = document.querySelectorAll('.gestion-quantite'); 
+    let gestionQuantiteArticle = document.querySelectorAll('.gestion-quantite-article'); 
+    gestionQuantiteArticle.forEach( item => {
 
-    articles.forEach( blocGestion => {
-      console.log("blocGestion = ", blocGestion);
-      let reduire = blocGestion.querySelector('.fa-minus-square');
-      reduire.addEventListener('click', function(event) {
-        console.log("Hello");
-        if (blocGestion.querySelector('.quantite-choisie').innerHTML <= 0) {
-          event.stopPropagation();
-          event.preventDefault();
-  
+
+      //1-  reduction
+      let reduire = item.querySelector('.fa-minus-square');
+      reduire.addEventListener('click', function(event) {  
+
+         if (item.querySelector('.quantite-choisie').innerHTML == 1 ) {
+
+          this.setAttribute("data-toggle","modal");
+          this.setAttribute("data-target","#supprimer-article-modal")
+          let supprimerArticleOk = document.querySelector('.supprimer-article-ok');
+          supprimerArticleOk.addEventListener('click', function() {
+
+            let articleChoisieKEY = localStorage.key(item.dataset.id);
+            localStorage.removeItem(articleChoisieKEY);
+            item.parentElement.parentElement.remove();
+            // updatePanierHeader();
+            if (localStorage.length == 0) {
+
+              window.location.replace("./../html/index.html")
+            }
+          });
+
         } else {
-        blocGestion.querySelector('.quantite-choisie').innerHTML --;
-        console.log(event.target.dataset.id);
-        }
+
+          item.querySelector('.quantite-choisie').innerHTML -- ; 
+          updateAffichagePanier(event.target.dataset.id, item.querySelector('.quantite-choisie'), item.querySelector('.prix-total'));
+
+
+          // let articleChoisieKEY = localStorage.key(event.target.dataset.id);  // ici modifie le localStorage pour l'element cliqué
+          // let articleChoisieJSON = localStorage.getItem(articleChoisieKEY);          
+          // let articleChoisie = JSON.parse(articleChoisieJSON);
+          // articleChoisie[4] = item.querySelector('.quantite-choisie').innerHTML;          
+          // articleChoisie[6] =  parseFloat(articleChoisie[4]) * parseFloat (articleChoisie[5]);
+          // item.querySelector('.prix-total').innerHTML = articleChoisie[6];
+          // articleChoisieJSON = JSON.stringify(articleChoisie);
+          // localStorage.setItem(articleChoisieKEY, articleChoisieJSON);         
+        }  
+        updatePanierHeader(); 
       });
-      let augmenter = blocGestion.querySelector('.fa-plus-square');
+
+      // 2- augmentation
+      let augmenter = item.querySelector('.fa-plus-square');
       augmenter.addEventListener('click', function(event) {
-  
-        blocGestion.querySelector('.quantite-choisie').innerHTML ++;
-      })
+
+        item.querySelector('.quantite-choisie').innerHTML ++;
+        updateAffichagePanier(event.target.dataset.id, item.querySelector('.quantite-choisie'), item.querySelector('.prix-total'));
+
+
+        // let articleChoisieKEY = localStorage.key(event.target.dataset.id); // ici modifier le localStorage sur l'element cliqué
+        // let articleChoisieJSON = localStorage.getItem(articleChoisieKEY);
+        // let articleChoisie = JSON.parse(articleChoisieJSON);
+        // articleChoisie[4] = item.querySelector('.quantite-choisie').innerHTML;
+        // articleChoisie[6] =  parseFloat(articleChoisie[4]) *  parseFloat (articleChoisie[5]);
+        // item.querySelector('.prix-total').innerHTML = articleChoisie[6];
+        // articleChoisieJSON = JSON.stringify(articleChoisie);
+        // localStorage.setItem(articleChoisieKEY, articleChoisieJSON);
+        updatePanierHeader(); 
+     })
     });
   }
+  // afficherPanier();
+}
+
+
+
+function updateAffichagePanier( foo, boo, doo) {
+  let articleChoisieKEY = localStorage.key(foo);  // ici modifie le localStorage pour l'element cliqué
+let articleChoisieJSON = localStorage.getItem(articleChoisieKEY);          
+let articleChoisie = JSON.parse(articleChoisieJSON);
+articleChoisie[4] = boo.innerHTML;          
+articleChoisie[6] =  parseFloat(articleChoisie[4]) * parseFloat (articleChoisie[5]);
+doo.innerHTML = articleChoisie[6];
+articleChoisieJSON = JSON.stringify(articleChoisie);
+localStorage.setItem(articleChoisieKEY, articleChoisieJSON);  
 
 }
 
@@ -232,6 +292,7 @@ window.addEventListener("load", () => {
   viderPanier();
   supprimerArticlePanier();
   ajusterQuantite();
+  // updateAffichagePanier();
   // confirmationCommande();
 
 });
