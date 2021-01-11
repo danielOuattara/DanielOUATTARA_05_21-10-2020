@@ -121,7 +121,7 @@
                 
                     <!-- Modal Header -->
                     <div class="modal-header">
-                        <h5 class="modal-title">Confirmez votre commande ?</h5>
+                        <h5 class="modal-title">Validez votre commande ?</h5>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                 
@@ -129,7 +129,7 @@
                     <div class="modal-body">
                         <div class="d-flex flex-column flex-md-row justify-content-md-around m-5">
                             <button type="button" class="btn btn-danger m-2 m-md-0 col-md-3" data-dismiss="modal">Non</button>
-                            <button type="button" class="confirmer-commande-ok btn btn-success m-2 m-md-0 col-md-3" data-dismiss="modal"> Oui </button>
+                            <button type="button" class="confirmer-commande-oui btn btn-success m-2 m-md-0 col-md-3"> Oui </button>
                         </div>
                     </div>
                 </div>
@@ -144,38 +144,45 @@
             <div class="form-row">
                 <div class="col-md-4 mb-3">
                     <label for="nom">Nom</label>
-                    <input type="text" class="form-control" id="nom" required pattern="([a-zA-Z-'+]\s?)+" />
+                    <input type="text" class="form-control" id="nom" required pattern="([a-zA-Z-'êäüïëöéèà,]\s?)+" />
                     <div class="valid-feedback">Valide !</div>
+                    <div class="invalid-feedback">S'il-vous-plaît, entrez un nom valide.</div>
                 </div>
 
                 <div class="col-md-4 mb-3">
                     <label for="prenom">Prénom</label>
-                    <input type="text" class="form-control" id="prenom" required pattern="([a-zA-Z-']\s?)+">
+                    <input type="text" class="form-control" id="prenom" required pattern="([a-zA-Z-'êäüïëöéèà,]\s?)+">
                     <div class="valid-feedback">Valide !</div>
+                    <div class="invalid-feedback">S'il vous plaît, entrez un prénom valide.</div>
                 </div>
+
                 <div class="col-md-4 mb-3">
                     <label for="email">e-mail</label>
-                    <input type="email" class="form-control" id="email" required pattern="^\w+@[a-zA-Z_]+?(\.[a-zA-Z]{2,4})+$">
-                    <div class="valid-feedback">Valide !</div>
+                    <input type="email" class="form-control" id="email" required pattern="^[a-zA-Z0-9!#$'*+=`\\\|%&_?^{}~âëêéèïîöôüûÿäà-]+(\.[a-zA-Z0-9!#$*=`\\\|+%&_*?^{}~âëêéèïîöôüûÿäà-]+)*@([a-z0-9âëêéèïîöôüûÿäà]+([a-zA-Z0-9-]*)\.)+[a-zA-Z]+$">
+                    <div class="valid-feedback"> Valide !</div>
+                    <div class="invalid-feedback">S'il vous plaît, entrez un e-mail valide.</div>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="col-md-4 mb-3">
                     <label for="adresse">Adresse (Numéro & voie ou autres)</label>
-                    <input type="text" class="form-control" id="adresse" required pattern="([a-zA-Z0-9-']\s?)+" />
+                    <input type="text" class="form-control" id="adresse" required/>
                     <div class="valid-feedback">Valide !</div>
+                    <div class="invalid-feedback">S'il vous plaît, entrez une adresse valide.</div>
                 </div>
 
                 <div class="col-md-4 mb-3">
                     <label for="code-postale">Code Postale</label>
                     <input type="text" class="form-control" id="code-postale" pattern="[0-9]{5}" required />
                     <div class="valid-feedback">Valide !</div>
+                    <div class="invalid-feedback">S'il vous plaît, entrez un code postal valide: 5 chiffres.</div>
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="ville">Ville</label>
-                    <input type="text" class="form-control" id="ville" required pattern="([a-zA-Z-',:+]\s?){2,}">
+                    <input type="text" class="form-control" id="ville" required pattern="([a-zA-Z-'âëêéèïîöôüûÿäà,:+]\s?){2,}">
                     <div class="valid-feedback">Valide !</div>
+                    <div class="invalid-feedback">S'il vous plaît, entrez une ville valide.</div>
                 </div>
             </div>
 
@@ -187,7 +194,7 @@
                     <div class="invalid-feedback">Vous êtes invité à accepter les CGV en cochant la case ci-contre.</div>
                 </div>
             </div>
-            <button class="btn btn-primary confirmation-commande" data-toggle="modal" data-target="#confirmer-commande-modal" type="sumbit">Commandez vos articles</button>
+            <button class="btn btn-primary confirmation-commande" type="submit" >Commandez vos articles</button>
         </form>
     
     </div>

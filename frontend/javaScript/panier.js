@@ -134,46 +134,86 @@ function updateAffichagePanier( foo, boo, doo) {   //ici modifie le localStorage
 
 
  
-// formulaire du contact : code de validation coté client  (Ancien)
-//-----------------------------------------------------------------
+  /* Action à accomplir: en cliquant sur le bouton
+
+  1- validation du formulaire de contact  --> OK
+  2- demande de confirmation de validation commande (modal) : OK !
+  3- création de l'objet de contact
+  4- création du tableau de produits
+  5- requête POST avec sendXHR()   */
+
+//----------------------------------------------------------------- OK
 
 // (function() {
-//     'use strict';
-//     window.addEventListener('load', function() {
-//       // Fetch all the forms we want to apply custom Bootstrap validation styles to
+//   'use strict';
+//   window.addEventListener('load', function() {
+//     // Get the forms we want to add validation styles to
+//     var forms = document.getElementsByClassName('needs-validation');
+//     let btnConfirmationCommande = document.querySelector('.confirmation-commande');
 
-//       let formulaire = document.getElementsByClassName('needs-validation');
-//       // Loop over them and prevent submission
-//       Array.prototype.filter.call(formulaire, function(form) {
-//         form.addEventListener('submit', function(event) {
-//           if (form.checkValidity() === false) {
-//             event.preventDefault();
-//             event.stopPropagation();
-//           }
-//           form.classList.add('was-validated');
-//         }, false);
-//       });
-//     }, false);
-//   })();
+//     var validation = Array.prototype.filter.call(forms, function(form) {      // Loop over them and prevent submission
+//       form.addEventListener('click', function(event) {
+//         if (form.checkValidity() === false) {
+//           event.preventDefault();
+//           event.stopPropagation();
+//         } 
+//         form.classList.add('was-validated');
+//         btnConfirmationCommande.setAttribute("data-toggle", "modal")
+//         btnConfirmationCommande.setAttribute("data-target", "#confirmer-commande-modal")
+//       }, false);
+//     });
+//   }, false);
+// })();
 
 
-  function formValidation() {
+function validerFormulaireCommande() {
 
-    let form = document.querySelector('.needs-validation');
-    form.addEventListener('submit', function(event) {
+  let form = document.querySelector('.needs-validation');
+  let btnConfirmationCommande = document.querySelector('.confirmation-commande');
+  form.addEventListener('submit', function(event) {
 
-        if( form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();   
-        }
+      if( form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();   
+      }
 
-        form.classList.add('was-validated');
-    });
-  }
-
+      form.classList.add('was-validated');
+      btnConfirmationCommande.setAttribute("data-toggle", "modal")
+      btnConfirmationCommande.setAttribute("data-target", "#confirmer-commande-modal")
+  });
+}
 
 // Créer l'objet de contact
 //-----------------------------------
+
+
+
+function creerObjetContact() {
+
+  let btnConfirmationCommande = document.querySelector('.confirmer-commande-oui')
+  
+  btnConfirmationCommande.addEventListener('click', function(event) {
+  event.preventDefault();
+
+  let prenom = document.querySelector('#prenom')
+  let nom = document.querySelector('#nom')
+  let adresse = document.querySelector('#adresse')
+  let codePostale = document.querySelector('#code-postale')
+  let ville = document.querySelector('#ville')
+  let email = document.querySelector('#email')
+
+  let contactObjet = {
+    prenomClient: prenom.value,  
+    nomClient: nom.value,
+    addresseClient: adresse.value, 
+    clientVille: ville.value ,
+    codePostaleClient: codePostale.value,
+    emailCLient: email.value
+  }
+  console.log("contact = ", contactObjet)
+
+  }
+}
 
 
 // Création du tableau de produits
@@ -181,22 +221,12 @@ function updateAffichagePanier( foo, boo, doo) {   //ici modifie le localStorage
 
 let products = [];
 
-function confirmationCommande() {
 
-  /* 
-  Action à accomplir: en cliquant sur le bouton
+ function confirmerCommande() {
 
-  1- demande de confirmation de validation commande (modal) : OK !
-  2- validation du formulaire de contact
-  3- création de l'objet de contact
-  4- création du tableau de produits
-  5- requête POST avec sendXHR()
+  let btnConfirmationCommandeOui = document.querySelector('.confirmer-commande-oui')
   
-  */
-
-  let btnConfirmationCommande = document.querySelector('.confirmer-commande-ok')
-  
-  btnConfirmationCommande.addEventListener('click', function(event) {
+  btnConfirmationCommandeOui.addEventListener('click', function(event) {
     console.log("Hello")
 
     // event.preventDefault();
@@ -234,7 +264,8 @@ window.addEventListener("load", () => {
   viderPanier();
   supprimerArticlePanier();
   ajusterQuantite();
-  confirmationCommande();
+  validerFormulaireCommande();
+  confirmerCommande();
 
 });
 
