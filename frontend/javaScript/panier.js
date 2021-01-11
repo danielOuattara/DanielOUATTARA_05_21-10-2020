@@ -109,13 +109,13 @@ function ajusterQuantite() {
 
 //----------------------------------------------------------------- OK
 
-function updateAffichagePanier( foo, boo, doo) {   //ici modifie le localStorage pour l'element cliqué
-    let articleChoisieKEY  = localStorage.key(foo); 
+function updateAffichagePanier( IdArticle, nouvelleQteChoisie, nouveauPrixTotal) {   //ici modifie le localStorage pour l'element cliqué
+    let articleChoisieKEY  = localStorage.key(IdArticle); 
     let articleChoisieJSON = localStorage.getItem(articleChoisieKEY);          
     let articleChoisie     = JSON.parse(articleChoisieJSON);
-    articleChoisie[4]      = boo.innerHTML;          
+    articleChoisie[4]      = nouvelleQteChoisie.innerHTML;          
     articleChoisie[6]      =  parseFloat(articleChoisie[4]) * parseFloat (articleChoisie[5]);
-    doo.innerHTML          = articleChoisie[6];
+    nouveauPrixTotal.innerHTML          = articleChoisie[6];
     articleChoisieJSON     = JSON.stringify(articleChoisie);
     localStorage.setItem(articleChoisieKEY, articleChoisieJSON);  
 }
@@ -137,34 +137,12 @@ function updateAffichagePanier( foo, boo, doo) {   //ici modifie le localStorage
   /* Action à accomplir: en cliquant sur le bouton
 
   1- validation du formulaire de contact  --> OK
-  2- demande de confirmation de validation commande (modal) : OK !
-  3- création de l'objet de contact
+  2- demande de confirmation de validation commande (modal) --> OK !
+  3- création de l'objet de contact  --> OK !
   4- création du tableau de produits
   5- requête POST avec sendXHR()   */
 
 //----------------------------------------------------------------- OK
-
-// (function() {
-//   'use strict';
-//   window.addEventListener('load', function() {
-//     // Get the forms we want to add validation styles to
-//     var forms = document.getElementsByClassName('needs-validation');
-//     let btnConfirmationCommande = document.querySelector('.confirmation-commande');
-
-//     var validation = Array.prototype.filter.call(forms, function(form) {      // Loop over them and prevent submission
-//       form.addEventListener('click', function(event) {
-//         if (form.checkValidity() === false) {
-//           event.preventDefault();
-//           event.stopPropagation();
-//         } 
-//         form.classList.add('was-validated');
-//         btnConfirmationCommande.setAttribute("data-toggle", "modal")
-//         btnConfirmationCommande.setAttribute("data-target", "#confirmer-commande-modal")
-//       }, false);
-//     });
-//   }, false);
-// })();
-
 
 function validerFormulaireCommande() {
 
@@ -180,82 +158,87 @@ function validerFormulaireCommande() {
       form.classList.add('was-validated');
       btnConfirmationCommande.setAttribute("data-toggle", "modal")
       btnConfirmationCommande.setAttribute("data-target", "#confirmer-commande-modal")
+      event.preventDefault();
   });
 }
 
-// Créer l'objet de contact
-//-----------------------------------
 
 
-
+//----------------------------------------- OK
+let contact= {};
 function creerObjetContact() {
 
-  let btnConfirmationCommande = document.querySelector('.confirmer-commande-oui')
-  
-  btnConfirmationCommande.addEventListener('click', function(event) {
-  event.preventDefault();
-
-  let prenom = document.querySelector('#prenom')
-  let nom = document.querySelector('#nom')
-  let adresse = document.querySelector('#adresse')
-  let codePostale = document.querySelector('#code-postale')
-  let ville = document.querySelector('#ville')
-  let email = document.querySelector('#email')
-
-  let contactObjet = {
-    prenomClient: prenom.value,  
-    nomClient: nom.value,
-    addresseClient: adresse.value, 
-    clientVille: ville.value ,
-    codePostaleClient: codePostale.value,
-    emailCLient: email.value
-  }
-  console.log("contact = ", contactObjet)
-
-  }
-}
-
-
-// Création du tableau de produits
-//---------------------------------
-
-let products = [];
-
-
- function confirmerCommande() {
-
   let btnConfirmationCommandeOui = document.querySelector('.confirmer-commande-oui')
-  
   btnConfirmationCommandeOui.addEventListener('click', function(event) {
-    console.log("Hello")
-
-    // event.preventDefault();
-
-  // let prenom = document.querySelector('#prenom')
-  // let nom = document.querySelector('#nom')
-  // let adresse = document.querySelector('#adresse')
-  // let codePostale = document.querySelector('#code-postale')
-  // let ville = document.querySelector('#ville')
-  // let email = document.querySelector('#email')
-
-  // let contactObjet = {
-
-  //   prenomClient: prenom.value,  
-  //   nomClient: nom.value,
-  //   addresseClient: adresse.value, 
-  //   clientVille: ville.value ,
-  //   codePostaleClient: codePostale.value,
-  //   emailCLient: email.value
-  // }
-
-  // console.log("contact = ", contactObjet)
-  // // console.log(contactObjet);
-    
-  //   event.preventDefault();
-
+  event.stopPropagation();
+  event.preventDefault()
+   contact = {
+     
+        firstName:   document.querySelector('#prenom').value,
+        lastName:    document.querySelector('#nom').value,
+        address:     document.querySelector('#adresse').value,
+        city:        document.querySelector('#ville').value,
+        email:       document.querySelector('#email').value
+  }
+    event.preventDefault();
     });
-
+    console.log("contact =", contact)
+    contact = JSON.stringify(contact)
+    return contact;
 }
+
+//----------------------------------- OK 
+let product =[];
+function creerTableauProduct() {
+  let btnConfirmationCommandeOui = document.querySelector('.confirmer-commande-oui')
+  btnConfirmationCommandeOui.addEventListener('click', function(event) {
+  event.stopPropagation();
+  event.preventDefault()
+  for (let i = 0; i < localStorage.length; i++) {
+    let articleChoisiKEY    = localStorage.key(i);
+    let articleChoisiJSON   = localStorage.getItem(articleChoisiKEY);
+    let articleChoisi       = JSON.parse(articleChoisiJSON);
+    if (articleChoisi[4] > 1) {
+      for (let j = articleChoisi[4]; j > 1; j-- ) {
+        product.push(articleChoisi[1])
+      }
+    } 
+    product.push(articleChoisi[1])
+  }
+  console.log("products =" , product);
+  product = JSON.stringify(product)
+  return product; 
+}
+}
+
+let body = {contact, product }
+console.log("body = " , body)
+// delete body;
+
+
+
+// function confirmerCommande() {
+//   let promise = new Promise( (res, rej) => {
+//     let btnConfirmationCommandeOui = document.querySelector('.confirmer-commande-oui')
+//     btnConfirmationCommandeOui.addEventListener('click', function(event) {
+//   }).then(creerObjetContact)
+//     .then(creerTableauProduct)
+//     .then(creerObjetPOST)
+//     .then(sendXHR('POST','http://localhost:3000/api/cameras/order' ,body));
+//   });
+// }
+
+function confirmerCommande() {
+    let btnConfirmationCommandeOui = document.querySelector('.confirmer-commande-oui')
+    btnConfirmationCommandeOui.addEventListener('click', function(event) {
+    creerObjetContact();
+    creerTableauProduct()
+    sendXHR('POST','http://localhost:3000/api/cameras/_order' ,{contact, product})
+  });
+}
+
+
+
 
 window.addEventListener("load", () => {
 
@@ -264,8 +247,12 @@ window.addEventListener("load", () => {
   viderPanier();
   supprimerArticlePanier();
   ajusterQuantite();
-  validerFormulaireCommande();
   confirmerCommande();
+  validerFormulaireCommande();
+  creerObjetContact();
+  creerTableauProduct()
+  confirmerCommande();
+
 
 });
 
