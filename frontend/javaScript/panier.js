@@ -2,17 +2,12 @@
 import {updatePanierHeader} from './updatePanierHeader.js';
 import {sendXHR} from './sendXHR.js';
 
-// Afficher tous les articles choisis dans le panier
-// localStorage.clear();
+// ----------------------------------------------- OK !
 function afficherPanier() {
-        console.log("localStorage.length  = ", localStorage.length)
      for ( let i = 0; i < localStorage.length; i++) {
 
-
         let articleChoisiKEY    = localStorage.key(i);
-        console.log(" articleChoisiKEY = ", articleChoisiKEY)
         let articleChoisiJSON   = localStorage.getItem(articleChoisiKEY);
-        console.log("articleChoisiJSON = ", articleChoisiJSON)
         let articleChoisi       = JSON.parse(articleChoisiJSON);
         let listingPanier       = document.querySelector('#vitrine');
         listingPanier.innerHTML +=  
@@ -40,9 +35,7 @@ function afficherPanier() {
       }  
 }
 
-// supprimer article : (OK!)
-//-------------------
-
+//----------------------------------------------- OK !
 function supprimerArticlePanier() {
 
   if (localStorage.length !== 0) {
@@ -55,11 +48,9 @@ function supprimerArticlePanier() {
         item.addEventListener('click', function() {
 
           supprimerArticleOk.addEventListener('click', () => {
-
             let articleChoisieKEY = localStorage.key(item.dataset.id);
             localStorage.removeItem(articleChoisieKEY);
             item.parentElement.parentElement.remove();
-            console.log(localStorage.length);
             updatePanierHeader();
 
             if (localStorage.length == 0) {
@@ -71,90 +62,80 @@ function supprimerArticlePanier() {
   }
 }
 
-
-// ajuster (+ / -) quantité article et prix total
-//------------------------------------------------
+//------------------------------------------------ OK
 function ajusterQuantite() {
-
   if( localStorage.length !== 0) {
-
     let gestionQuantiteArticle = document.querySelectorAll('.gestion-quantite-article'); 
+
     gestionQuantiteArticle.forEach( item => {
-
-
-      //1-  reduction
       let reduire = item.querySelector('.fa-minus-square');
       reduire.addEventListener('click', function(event) {  
 
-         if (item.querySelector('.quantite-choisie').innerHTML == 1 ) {
-
+        if (item.querySelector('.quantite-choisie').innerHTML == 1 ) { // 1- suppression
           this.setAttribute("data-toggle","modal");
           this.setAttribute("data-target","#supprimer-article-modal")
-          let supprimerArticleOk = document.querySelector('.supprimer-article-ok');
-          supprimerArticleOk.addEventListener('click', function() {
+          let supprimerArticleOui = document.querySelector('.supprimer-article-ok');
 
-            let articleChoisieKEY = localStorage.key(item.dataset.id);
+          supprimerArticleOui.addEventListener('click', function() {
+            let articleChoisieKEY = localStorage.key(reduire.dataset.id);
             localStorage.removeItem(articleChoisieKEY);
             item.parentElement.parentElement.remove();
-            // updatePanierHeader();
+            updatePanierHeader();
             if (localStorage.length == 0) {
-
               window.location.replace("./../html/index.html")
             }
           });
-
-        } else {
-
+ 
+        } else { //1-  reduction
           item.querySelector('.quantite-choisie').innerHTML -- ; 
-          updateAffichagePanier(event.target.dataset.id, item.querySelector('.quantite-choisie'), item.querySelector('.prix-total'));       
+          updateAffichagePanier(event.target.dataset.id, item.querySelector('.quantite-choisie'), item.querySelector('.prix-total'));   
         }  
         updatePanierHeader(); 
+
       });
 
-      // 2- augmentation
-      let augmenter = item.querySelector('.fa-plus-square');
-      augmenter.addEventListener('click', function(event) {
+      let augmenter = item.querySelector('.fa-plus-square');  // 2- augmentation
 
+      augmenter.addEventListener('click', function(event) {
         item.querySelector('.quantite-choisie').innerHTML ++;
         updateAffichagePanier(event.target.dataset.id, item.querySelector('.quantite-choisie'), item.querySelector('.prix-total'));
         updatePanierHeader(); 
+        
      })
     });
   }
-  // afficherPanier();
+  
 }
 
-function updateAffichagePanier( foo, boo, doo) {
-  let articleChoisieKEY = localStorage.key(foo);  // ici modifie le localStorage pour l'element cliqué
-let articleChoisieJSON = localStorage.getItem(articleChoisieKEY);          
-let articleChoisie = JSON.parse(articleChoisieJSON);
-articleChoisie[4] = boo.innerHTML;          
-articleChoisie[6] =  parseFloat(articleChoisie[4]) * parseFloat (articleChoisie[5]);
-doo.innerHTML = articleChoisie[6];
-articleChoisieJSON = JSON.stringify(articleChoisie);
-localStorage.setItem(articleChoisieKEY, articleChoisieJSON);  
+//----------------------------------------------------------------- OK
+
+function updateAffichagePanier( foo, boo, doo) {   //ici modifie le localStorage pour l'element cliqué
+    let articleChoisieKEY  = localStorage.key(foo); 
+    let articleChoisieJSON = localStorage.getItem(articleChoisieKEY);          
+    let articleChoisie     = JSON.parse(articleChoisieJSON);
+    articleChoisie[4]      = boo.innerHTML;          
+    articleChoisie[6]      =  parseFloat(articleChoisie[4]) * parseFloat (articleChoisie[5]);
+    doo.innerHTML          = articleChoisie[6];
+    articleChoisieJSON     = JSON.stringify(articleChoisie);
+    localStorage.setItem(articleChoisieKEY, articleChoisieJSON);  
 }
 
 
-
-// vider panier : OK !
-//------------------
-
+//------------------------------------------------------------------ OK
  function viderPanier() {
 
     let videurPanier = document.querySelector('.vider-panier-ok');
     videurPanier.addEventListener('click', () => {
-        videurPanier.href = "./../html/index.html";
-        localStorage.clear();
-        updatePanierHeader();
+      localStorage.clear();
+      updatePanierHeader();
+      videurPanier.href = "./../html/index.html";
     });
-
  }
 
 
-
-// formulaire du contact : code de validation coté client
-//--------------------------------------------------------
+ 
+// formulaire du contact : code de validation coté client  (Ancien)
+//-----------------------------------------------------------------
 
 // (function() {
 //     'use strict';
@@ -191,14 +172,8 @@ localStorage.setItem(articleChoisieKEY, articleChoisieJSON);
   }
 
 
-
-  
 // Créer l'objet de contact
 //-----------------------------------
-
-
-
-
 
 
 // Création du tableau de produits
@@ -207,7 +182,6 @@ localStorage.setItem(articleChoisieKEY, articleChoisieJSON);
 let products = [];
 
 function confirmationCommande() {
-
 
   /* 
   Action à accomplir: en cliquant sur le bouton
@@ -219,8 +193,6 @@ function confirmationCommande() {
   5- requête POST avec sendXHR()
   
   */
-
-
 
   let btnConfirmationCommande = document.querySelector('.confirmer-commande-ok')
   
@@ -255,13 +227,6 @@ function confirmationCommande() {
 
 }
 
-
-
-
-
-
-
-
 window.addEventListener("load", () => {
 
   afficherPanier();
@@ -269,8 +234,7 @@ window.addEventListener("load", () => {
   viderPanier();
   supprimerArticlePanier();
   ajusterQuantite();
-  // updateAffichagePanier();
-  // confirmationCommande();
+  confirmationCommande();
 
 });
 

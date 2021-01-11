@@ -46,7 +46,7 @@ function afficherData(data) {
                                 </div>
                             </div>
                             <div class="d-flex flex-column flex-md-row justify-content-md-around ">
-                                <a class=" my-1 btn btn-info revenir-vitrine" href="./../html/index.html">Revenir en vitrine</a>
+                                <a class=" my-1 btn btn-info revenir-vitrine" href="./../html/index.html">Continuer mes achats</a>
                                 <button class="btn btn-success my-1 ajoutez-panier">Ajoutez au panier</button>
                                 <a class="btn btn-info my-1 aller-panier" href="./../html/panier.html">Allez au panier</a>
                             <div>
@@ -143,9 +143,7 @@ function controlerButtonAllerPanier() {
 
 // Afficher page produit et capter les changements client
 document.addEventListener("DOMContentLoaded", () => {
-
     sendXHR('GET', 'http://localhost:3000/api/cameras/'+produit_id)
-        
         .then(data => {
             afficherData(data);
             creationOptionLentilles(data.lenses);
@@ -163,7 +161,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 function ajouterAuPanier(data) {
-
     let btnAjouterPanier = document.querySelector('.ajoutez-panier');
 
     btnAjouterPanier.addEventListener('click', () => {
@@ -188,7 +185,7 @@ function ajouterAuPanier(data) {
                 prixTotal.textContent
         ];
 
-        // creer une clef par choix d'article pour localStorage
+        // créer une clef par choix d'article pour localStorage
         let articleChoisiKEY = articleName.innerHTML.replace(/\s/, "_")+ "_" + articleID.trim() + "_" + lentilleChoisie.value.replace(/\s/, "_");
 
         // stocker contenu dans la localStorage

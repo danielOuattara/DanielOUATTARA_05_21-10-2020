@@ -11,7 +11,6 @@ export async function updatePanierHeader() {
         let keyArticleChoisi = localStorage.key(i);
         let articlesChoisisJSON = localStorage.getItem(keyArticleChoisi);
         let articlesChoisis = JSON.parse(articlesChoisisJSON);
-        console.log("articlesChoisis = ", articlesChoisis);
 
         //console.log(articlesChoisis)
         nombreArticlesPanier += parseFloat(articlesChoisis[4]);
