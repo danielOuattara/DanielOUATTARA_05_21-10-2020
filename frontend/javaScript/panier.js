@@ -1,7 +1,7 @@
 
 import {updatePanierHeader} from './updatePanierHeader.js';
 import {sendXHR} from './sendXHR.js';
-
+// localStorage.clear();
 // ----------------------------------------------- OK !
 function afficherPanier() {
      for ( let i = 0; i < localStorage.length; i++) {
@@ -35,7 +35,7 @@ function afficherPanier() {
       }  
 }
 
-//----------------------------------------------- OK !
+//------------------------------------------------------------------ OK 
 function supprimerArticlePanier() {
 
   if (localStorage.length !== 0) {
@@ -62,7 +62,7 @@ function supprimerArticlePanier() {
   }
 }
 
-//------------------------------------------------ OK
+//------------------------------------------------------------------ OK
 function ajusterQuantite() {
   if( localStorage.length !== 0) {
     let gestionQuantiteArticle = document.querySelectorAll('.gestion-quantite-article'); 
@@ -107,7 +107,7 @@ function ajusterQuantite() {
   
 }
 
-//----------------------------------------------------------------- OK
+//------------------------------------------------------------------ OK
 
 function updateAffichagePanier( IdArticle, nouvelleQteChoisie, nouveauPrixTotal) {   //ici modifie le localStorage pour l'element cliqué
     let articleChoisieKEY  = localStorage.key(IdArticle); 
@@ -133,108 +133,84 @@ function updateAffichagePanier( IdArticle, nouvelleQteChoisie, nouveauPrixTotal)
  }
 
 
- 
-  /* Action à accomplir: en cliquant sur le bouton
-
-  1- validation du formulaire de contact  --> OK
-  2- demande de confirmation de validation commande (modal) --> OK !
-  3- création de l'objet de contact  --> OK !
-  4- création du tableau de produits
-  5- requête POST avec sendXHR()   */
-
-//----------------------------------------------------------------- OK
-
+ //----------------------------------------------------------------- OK
 function validerFormulaireCommande() {
 
   let form = document.querySelector('.needs-validation');
-  let btnConfirmationCommande = document.querySelector('.confirmation-commande');
   form.addEventListener('submit', function(event) {
+    
+    if (!form.checkValidity()) {
+      event.preventDefault();
+      event.stopPropagation();  
+    }
+    form.classList.add('was-validated');
 
-      if( form.checkValidity() === false) {
-          event.preventDefault();
-          event.stopPropagation();   
-      }
-
-      form.classList.add('was-validated');
+    if(form.checkValidity()) {
+      let btnConfirmationCommande = document.querySelector('.confirmation-commande');
       btnConfirmationCommande.setAttribute("data-toggle", "modal")
       btnConfirmationCommande.setAttribute("data-target", "#confirmer-commande-modal")
       event.preventDefault();
+    }
   });
 }
 
 
-
-//----------------------------------------- OK
-let contact= {};
+//------------------------------------------------------------------ OK
+let contact;
 function creerObjetContact() {
-
-  let btnConfirmationCommandeOui = document.querySelector('.confirmer-commande-oui')
-  btnConfirmationCommandeOui.addEventListener('click', function(event) {
-  event.stopPropagation();
-  event.preventDefault()
    contact = {
-     
-        firstName:   document.querySelector('#prenom').value,
-        lastName:    document.querySelector('#nom').value,
-        address:     document.querySelector('#adresse').value,
-        city:        document.querySelector('#ville').value,
-        email:       document.querySelector('#email').value
+      firstName:   document.querySelector('#prenom').value,
+      lastName:    document.querySelector('#nom').value,
+      address:     document.querySelector('#adresse').value,
+      city:        document.querySelector('#ville').value,
+      email:       document.querySelector('#email').value
   }
-    event.preventDefault();
-    });
-    console.log("contact =", contact)
-    contact = JSON.stringify(contact)
     return contact;
 }
 
-//----------------------------------- OK 
-let product =[];
+//------------------------------------------------------------------ OK 
+
+let products =[];
 function creerTableauProduct() {
-  let btnConfirmationCommandeOui = document.querySelector('.confirmer-commande-oui')
-  btnConfirmationCommandeOui.addEventListener('click', function(event) {
-  event.stopPropagation();
-  event.preventDefault()
   for (let i = 0; i < localStorage.length; i++) {
     let articleChoisiKEY    = localStorage.key(i);
     let articleChoisiJSON   = localStorage.getItem(articleChoisiKEY);
     let articleChoisi       = JSON.parse(articleChoisiJSON);
     if (articleChoisi[4] > 1) {
       for (let j = articleChoisi[4]; j > 1; j-- ) {
-        product.push(articleChoisi[1])
+        products.push(articleChoisi[1])
       }
     } 
-    product.push(articleChoisi[1])
+    products.push(articleChoisi[1])
   }
-  console.log("products =" , product);
-  product = JSON.stringify(product)
-  return product; 
-}
+  return products; 
 }
 
-let body = {contact, product }
-console.log("body = " , body)
-// delete body;
+
+function capterDataCommande() {
+  let prixTotal= 0;
+  document.querySelectorAll('.prix-total').forEach(item => prixTotal += parseInt(item.innerHTML))
+  // console.log(prixTotal);
+  localStorage.setItem('prixTotal', prixTotal);
+}
 
 
+function dirigerVersPageConfirmationCommande() {
+  location.replace('./../html/confirmation.html')
+}
 
-// function confirmerCommande() {
-//   let promise = new Promise( (res, rej) => {
-//     let btnConfirmationCommandeOui = document.querySelector('.confirmer-commande-oui')
-//     btnConfirmationCommandeOui.addEventListener('click', function(event) {
-//   }).then(creerObjetContact)
-//     .then(creerTableauProduct)
-//     .then(creerObjetPOST)
-//     .then(sendXHR('POST','http://localhost:3000/api/cameras/order' ,body));
-//   });
-// }
+//------------------------------------------------------------------ OK 
 
 function confirmerCommande() {
     let btnConfirmationCommandeOui = document.querySelector('.confirmer-commande-oui')
     btnConfirmationCommandeOui.addEventListener('click', function(event) {
-    creerObjetContact();
-    creerTableauProduct()
-    sendXHR('POST','http://localhost:3000/api/cameras/_order' ,{contact, product})
-  });
+      creerObjetContact();
+      creerTableauProduct();
+      sendXHR('POST','http://localhost:3000/api/cameras/order' ,{contact, products})
+        .then( responseData => localStorage.setItem('_idCommande', responseData.orderId))
+        .then(capterDataCommande)
+        .then(dirigerVersPageConfirmationCommande);
+    })
 }
 
 
@@ -247,10 +223,7 @@ window.addEventListener("load", () => {
   viderPanier();
   supprimerArticlePanier();
   ajusterQuantite();
-  confirmerCommande();
   validerFormulaireCommande();
-  creerObjetContact();
-  creerTableauProduct()
   confirmerCommande();
 
 

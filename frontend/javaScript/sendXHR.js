@@ -3,7 +3,7 @@ export async function sendXHR (method, url, data) {
     let response = await fetch( url, {
         method ,
         body: JSON.stringify(data),
-        headers: data ? {'Content-Type' : 'application/json'} : {}
+        headers: data ? {'Content-Type':'application/json'} : {}
     });
 
     if( response.status >= 400) {

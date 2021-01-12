@@ -20,8 +20,6 @@ export async function updatePanierHeader() {
     document.querySelector('.contenu-panier').innerHTML = nombreArticlesPanier;
     document.querySelector('.montant-panier').innerHTML = montantTotalPanier + "€"; 
 
-
-
     // update disponibilité du lien vers panier
     let lienHrefPanier = document.querySelector('.lien-vers-panier');
 
