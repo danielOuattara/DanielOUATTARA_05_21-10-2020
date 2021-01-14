@@ -1,67 +1,95 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr-FR">
 <head>
     <meta charset="UTF-8">
-    <title>Confirmation OriCamera </title>
+    <title>Orinoco e-commerce</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./../style/style_index.css">
-    <script src="https://kit.fontawesome.com/2ca4bf7488.js" crossorigin="anonymous"></script>
-    <link rel="shortcut icon" type="image/x-icon" href="./images/favicon.png" />
-    <link rel="stylesheet" href="./../style/style_index.css">
-</head>
-<body>
-    
-    <!--  HEADER     ============================= -->
-    <header>
-        <div class="container-fluid bg-dark">
-            <nav class="navbar navbar-expand-sm navbar-dark">
-                <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#head-navbar" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button> -->
-                <a class="navbar-brand lien-vers-panier" id="icone-panier-top"> 
-                    <img class="image-top-logo responsive" src="./../images/caddy.png" alt="Orinoco logo e-commerce spécialisé"/>
-                </a>
-                
-                <div id="head-navbar" class="collapse navbar-collapse">
-                </div>
-            </nav>
-		</div>
-        <div class="jumbotron jumbotron-fluid">
-            <h1 class=" text-center logo-text display-3"> Commande validée</h1>            
+    <link rel="shortcut icon" type="image/x-icon" href="./../images/caddy.png" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+     <!--  HEADER     ============================= -->    
+     <header>
+        <div class="container-fluid bg-dark p-4">
+            
         </div>
-  
+        <div class="jumbotron jumbotron-fluid bloc-titre">
+            <h1 class=" text-center logo-text">
+                <img class="image-logo" src="./../images/caddy.png" alt="Orinoco logo e-commerce spécialisé"/>
+                    Confirmation</h1>
+        </div>
     </header>
     <!--  HEADER-END     ============================= -->
 
 
-
    <!--  MAIN     ============================= -->
     <main>
+        
+        <div class="container border rounded border-info mt-0 mx-xs-1 p-5 bloc-confirmation">
+            <h2 class="mb-4">Votre commande a bien été validée <i class='far fa-smile-wink'></i></h2>
+            <p class="">Toute l'équipe d'OriCamera vous remercie pour votre achat.</p>
+            <h4 class="my-4 border border-top-0 border-right-0 border-left-0 border-dark border-outline p-3 titre-reference-confirmation">Références de commande :</h4>
 
-        <div>Votre commande a bien été validée</div>
+            <p class="font-weight-bold identifiant-confirmation">Identifiant :</p>
+            <p class="border rounded p-2 text-white paragraph-id-confirmation"><span id="commande-id"></span></p>
 
-        Référence(s) de votre commande: cameras :<span id="orderID"></span>
-    
-    Merci <span id="info-client"></span> pour votre commande chez Orinoco !
-    
-    Un e-mail de confirmation sera envoyé à l'adresse <span id="email-client"></span> et contenant le récapitutif de votre commande ainsi que les details pour
-    la livraison à votre adresse.
+            <p class="font-weight-bold montant-confirmation">Montant:</p>
+            <p id="prix-total-confirmation" class="border rounded p-2 text-white prix-total-confirmation"><span id="prix-total"></span>&nbsp;€</p>
 
+            <p id="details-confirmation">Un e-mail de confirmation sera envoyé avec un récapitutif de votre commande ainsi que les details pour
+                la livraison à votre adresse.</p>
+        </div>    
 
-    Orinoco vous remercie ! À très bientôt sur notre site !
-
+        <div class="container mt-5 bloc-confirmation text-center">
+            <div class=" alert alert-info alert-dismissible my-5 text-center">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>NOTE : </strong>Dans 30 secondes vous serez redirigez vers la boutique
+            </div>
+                <a id="bouton-vers-boutique" href="#" class="btn col-sm-4 my-2 mx-1 text-white">Revenir à la boutique</a>
+                <a id="bouton-vers-navigation" href="#" class="btn col-sm-4 my-2 mx-1 text-white"> Continuez votre navigation</a>
+        </div>  
 
     </main>
     <!--  MAIN-END     ============================= -->
 
-    <footer></footer>
+    <!-- FOOTER === -->
+    <footer>
+        <div class="bg-dark text-white container-reseaux-sociaux p-2 mb-2">    
+            <div class="container-fluid ">
+                <div class="row">
+                    <div class="col-sm-3 text-center p-2 reseaux-sociaux">
+                        <a class="social" href="https://twitter.com/?lang=fr"><i class="fab fa-twitter"></i>&nbsp;Twitter</a>
+                    </div>
+                    
+                    <div class="col-sm-3 text-center p-2 reseaux-sociaux">
+                        <a class="social" href="https://fr-fr.facebook.com/"><i class="fab fa-facebook-f"></i>&nbsp;Facebook</a>
+                    </div>
+                    
+                    <div class="col-sm-3 text-center p-2 reseaux-sociaux">
+                        <a class="social" href="https://dribbble.com/"><i class="fab fa-dribbble"></i>&nbsp;Dribble</a>
+                    </div>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+                    <div class="col-sm-3 text-center p-2 reseaux-sociaux">
+                        <a class="social" href="https://www.instagram.com/?hl=fr"><i class="fab fa-instagram"></i>&nbsp;Instagam</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row  mt-3 p-2">
+            <div class="col-md-12 copyright ">
+                <p class="col-sm-6 text-center d-sm-inline m-sm-2">&copy; Copyright 2021 - Oricamera &reg;</p>
+                <p class="col-sm-6 text-center d-sm-inline m-sm-2">Orinoco &reg;. Tous droits reservés.</p>
+            </div>
+        </div>
+    </footer> 
+    <!--FOOTER- END -->
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script type="module" src="./../javaScript/confirmation.js"></script>
 
 </body>

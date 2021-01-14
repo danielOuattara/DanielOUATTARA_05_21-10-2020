@@ -1,7 +1,6 @@
 
 import {updatePanierHeader} from './updatePanierHeader.js';
 import {sendXHR} from './sendXHR.js';
-// localStorage.clear();
 // ----------------------------------------------- OK !
 function afficherPanier() {
      for ( let i = 0; i < localStorage.length; i++) {
@@ -12,28 +11,32 @@ function afficherPanier() {
         let listingPanier       = document.querySelector('#vitrine');
         listingPanier.innerHTML +=  
                         `
-                        <div class="donnees-article d-flex flex-row border-bottom border-top border-3 border-info border-5 py-3 flex-md-row articles ">
+                        <div id="bloc-article" class="donnees-article d-sm-flex flex-sm-row border-bottom border-top py-3 flex-sm-row articles ">
                            <div class="">
                               <a href="./produit.html?id=${articleChoisi[1]}" >
                                   <img src=${articleChoisi[2]} width=300 alt="oricono oricamera image ${articleChoisi[0]}" 
-                                       class="img-thumbnail mx-auto d-block">
+                                       class="img-thumbnail mx-auto d-block m-sm-3">
                               </a>
                             </div>
                             <div class=" mx-auto text-center">
-                                <h2 class="mb-4 mt-4"> ${articleChoisi[0]} </h2> 
-                                <p>Lentilles Choisie :  ${articleChoisi[3]}</p>
+                                <h2 class="m-3"> ${articleChoisi[0]} </h2> 
+                                <p>Lentille choisie :  ${articleChoisi[3]}</p>
                                 <div class ="gestion-quantite-article">
                                     <p>Quantite choisie : <span class= "quantite-choisie">${articleChoisi[4]} </span></p>
                                     <p><i class="far fa-minus-square btn" data-id="${i}"></i> &nbsp;<i class="far fa-plus-square btn" data-id="${i}"></i></p>
                                     <p>Prix Unitaire :  ${articleChoisi[5]}€</p>
-                                    <p>Prix Total : <span class="prix-total" data-id="${i}">${articleChoisi[5] * articleChoisi[4]}</span> €</p>
+                                    <p class=" prix-total-panier border rounded d-inline-block p-2 text-light bg-secondary">Prix Total : <span class="prix-total" data-id="${i}">${articleChoisi[5] * articleChoisi[4]}</span> €</p>
                                 </div>
-                                <button data-id="${i}" class="supprimer-article btn btn-warning mt-4" data-toggle="modal" data-target="#supprimer-article-modal">Supprimez article</button>
+                                <button data-id="${i}" class="supprimer-article btn mt-2" data-toggle="modal" data-target="#supprimer-article-modal">Supprimez article</button>
                             </div>
                         </div>
                         `;
       }  
 }
+
+
+// prix-total text-left text-light bg-secondary 
+
 
 //------------------------------------------------------------------ OK 
 function supprimerArticlePanier() {
@@ -54,7 +57,7 @@ function supprimerArticlePanier() {
             updatePanierHeader();
 
             if (localStorage.length == 0) {
-              window.location.replace("./../html/index.html")
+              window.location.replace("./../index.html")
             }
           });
         });
@@ -82,7 +85,7 @@ function ajusterQuantite() {
             item.parentElement.parentElement.remove();
             updatePanierHeader();
             if (localStorage.length == 0) {
-              window.location.replace("./../html/index.html")
+              window.location.replace("./../index.html")
             }
           });
  
@@ -128,7 +131,7 @@ function updateAffichagePanier( IdArticle, nouvelleQteChoisie, nouveauPrixTotal)
     videurPanier.addEventListener('click', () => {
       localStorage.clear();
       updatePanierHeader();
-      videurPanier.href = "./../html/index.html";
+      videurPanier.href = "./../index.html";
     });
  }
 
@@ -191,7 +194,7 @@ function capterDataCommande() {
   let prixTotal= 0;
   document.querySelectorAll('.prix-total').forEach(item => prixTotal += parseInt(item.innerHTML))
   // console.log(prixTotal);
-  localStorage.setItem('prixTotal', prixTotal);
+  localStorage.setItem('prix-total', prixTotal);
 }
 
 
@@ -207,7 +210,7 @@ function confirmerCommande() {
       creerObjetContact();
       creerTableauProduct();
       sendXHR('POST','http://localhost:3000/api/cameras/order' ,{contact, products})
-        .then( responseData => localStorage.setItem('_idCommande', responseData.orderId))
+        .then( responseData => localStorage.setItem('commande-id', responseData.orderId))
         .then(capterDataCommande)
         .then(dirigerVersPageConfirmationCommande);
     })

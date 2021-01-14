@@ -3,6 +3,7 @@
   src: url(./../belligerent.ttf);
 }
 
+/* HEADER  ===================*/
 header {
   background: #ede0e6;
 }
@@ -10,6 +11,12 @@ header {
 header #icone-panier-top {
   position: relative;
   font-size: 13px !important;
+  padding: 5px 10px;
+}
+
+header #icone-panier-top:hover {
+  background-color: #262626 !important;
+  border-radius: 5px;
 }
 
 header #icone-panier-top .image-top-logo {
@@ -18,12 +25,12 @@ header #icone-panier-top .image-top-logo {
 
 header #icone-panier-top .contenu-panier {
   position: absolute;
-  top: -4px;
-  left: 10px;
+  top: -3px;
+  left: 19px;
   border-radius: 50%;
   background: #fff;
-  padding: 1px 4px;
-  color: #000 !important;
+  padding: 1px 6px;
+  color: #3e1879 !important;
 }
 
 header #icone-panier-top .montant-panier {
@@ -32,27 +39,196 @@ header #icone-panier-top .montant-panier {
   left: 10px;
 }
 
+header #head-navbar a {
+  padding: 5px 10px;
+}
+
+header #head-navbar a:hover {
+  background-color: #262626 !important;
+  border-radius: 5px;
+}
+
 header h1 {
+  font-size: 3.5rem !important;
+}
+
+header h1, header .text-accueil {
   color: #2a1e26;
   font-family: belligerent, "sans serif";
 }
 
 header h1 .image-logo {
-  width: 80px;
+  width: 70px;
 }
 
 header .bloc-titre {
-  background: #ede0e6 !important;
+  background-color: #f0cfba !important;
 }
 
-footer img {
-  width: 60px;
+header .text-accueil {
+  font-size: 38px !important;
 }
 
-i {
+/* MAIN ==================*/
+main {
+  /*page confirmation*/
+}
+
+main p {
+  font-size: 18px;
+}
+
+main #bloc-article {
+  background-color: #f2ecfb;
+  border-color: #c0a3ed !important;
+}
+
+main .bouton-decouvrir {
+  background-color: #7639d8 !important;
+  color: white;
+  transition: transform 0.3s;
+}
+
+main .bouton-decouvrir:hover {
+  transform: scale(0.9);
+  color: #fff;
+}
+
+main .vider-panier {
+  margin-top: 30px;
+}
+
+main h3.prix-total {
+  background-color: #b66027 !important;
+}
+
+main p.prix-total-panier {
+  font-size: 22px !important;
+  background-color: #7639d8 !important;
+}
+
+main .supprimer-article {
+  background: #c3672a !important;
+  color: #fff;
+  transition: transform 0.3s;
+}
+
+main .supprimer-article:hover {
+  transform: scale(0.9);
+  color: #fff;
+}
+
+main .bouton-lien-produit {
+  text-decoration: none;
+  color: white;
+  transition: transform 0.3s ease-in-out;
+}
+
+main .bouton-lien-produit:hover {
+  transform: scale(0.9);
+  color: #fff;
+}
+
+main i {
+  font-size: 22px !important;
+  display: inline-block !important;
+  margin: 0 15px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+main i:hover {
+  background-color: #6929ce !important;
+  color: #fff !important;
+  font-size: 18px !important;
+}
+
+main .formulaire-commande {
+  border-color: #c0a3ed !important;
+  background-color: #ddcef5 !important;
+}
+
+main .formulaire-commande .confirmation-commande {
+  background-color: #6929ce !important;
+  color: #fff;
+  padding: 1vw;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+main .formulaire-commande h2 {
+  background-color: #6929ce !important;
   display: inline-block;
-  font-size: 26px !important;
-  margin-left: 5px;
+  padding: 0.5rem;
+  font-size: 24px;
+  color: #fff;
+  border-radius: 5px;
+  margin: 0 0 1rem 0.25rem;
 }
 
-/* Page de confirmation*/
+main .formulaire-commande label {
+  color: #5320a4;
+  margin-left: 0.5rem;
+}
+
+main .paragraph-id-confirmation, main .prix-total-confirmation {
+  background-color: #5320a4;
+  font-size: 20px;
+  padding: 10px;
+}
+
+main .bloc-confirmation {
+  border-color: #c0a3ed !important;
+}
+
+main #bouton-vers-boutique {
+  background-color: #6929ce !important;
+}
+
+main #bouton-vers-navigation {
+  background-color: #6929ce !important;
+}
+
+/*FOOTER ========================================*/
+footer {
+  background: #5320a4 !important;
+  color: #fff;
+  margin-top: 100px;
+}
+
+footer .container-reseaux-sociaux {
+  border-bottom: 1px solid #FFFFFF;
+}
+
+footer .reseaux-sociaux {
+  display: inline-block;
+  padding: 30px;
+  color: #fff;
+  transition: transform 0.2s;
+}
+
+footer .reseaux-sociaux:hover {
+  color: #000;
+  padding: 30px;
+  border-bottom: 1px solid #fff;
+  transform: scale(0.9);
+}
+
+footer i {
+  color: #fff;
+  font-size: 20px;
+}
+
+footer a {
+  color: #fff;
+  font-size: 16px;
+  transition: transform 0.3s;
+}
+
+footer a:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+footer .copyright {
+  font-size: 14px;
+}

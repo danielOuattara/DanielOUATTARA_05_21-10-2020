@@ -4,23 +4,23 @@
 }
 
 $logo-font: belligerent, "sans serif";
+$couleur-primaire : #854edc;
+$couleur-secondaire: #cb6b2c;
+// $couleur-tertiaire:#6b2ad3
 
 
 
+/* HEADER  ===================*/
 header {
     background: #ede0e6;
 
     #icone-panier-top {
         position: relative;
         font-size: 13px!important;
-        // display: inline-block;
-        // padding: 2px 10px;
-        // border: 1px solid green;
-
+        padding: 5px 10px;
         &:hover {
-            //background: #fff;
-            // border: 1px solid #fff;
-            // border-radius: 20%;
+            background-color: darken(white, 85%)!important;
+            border-radius: 5px;
         }
 
         .image-top-logo{
@@ -29,56 +29,216 @@ header {
 
         .contenu-panier {
             position: absolute;
-            top: -4px;
-            left: 10px;
+            top: -3px;
+            left: 19px;
             border-radius: 50%;
             background: #fff;
-            padding: 1px 4px; 
-            color: #000!important;
-            
+            padding: 1px 6px; 
+            color: darken($couleur-primaire, 30%)!important;   
         }
         .montant-panier {
             position: relative;
             top: 0px;
             left: 10px;
         }
-
     }
 
+    #head-navbar a {
+        padding: 5px 10px;
+        &:hover {
+            background-color: darken(white, 85%)!important;
+            border-radius: 5px;
+        }
+    }
 
+    h1 {
+        font-size: 3.5rem!important;
+    }
 
-    h1{
+    h1,  .text-accueil{
         color: #2a1e26;
         font-family: $logo-font;
     }
     
     h1 .image-logo {
-     width: 80px;
+     width: 70px;
     }
 
     .bloc-titre {
-        background: #ede0e6 !important;
+        background-color: lighten($couleur-secondaire, 35%)!important;
     }
 
+    .text-accueil {
+        font-size: 38px!important;
+    } 
 }
 
+
+
+  /* MAIN ==================*/
 main {
 
-
-    
-}
-
-footer{
-    img {
-        width: 60px;
+    p {
+        font-size: 18px;
     }
+    #bloc-article {
+        background-color: lighten($couleur-primaire, 37%);
+        border-color: lighten($couleur-primaire, 20%)!important;
+    }
+
+    .bouton-decouvrir {
+        background-color: darken($couleur-primaire, 5%)!important;
+        color: white;
+        transition: transform 0.3s;
+        &:hover {
+            transform: scale(0.9);
+            color: #fff;
+        }
+    }
+
+    .vider-panier {
+      margin-top: 30px;
+    }
+
+    h3.prix-total {
+        background-color: darken($couleur-secondaire, 5%)!important;
+    }
+
+    p.prix-total-panier {
+        font-size: 22px!important; 
+        background-color: darken($couleur-primaire, 5%)!important;
+    }
+
+    .supprimer-article {
+        background: darken($couleur-secondaire, 2%)!important;
+        color: #fff;
+        transition: transform 0.3s;
+        &:hover {
+            transform: scale(0.9);
+            color: #fff;
+        }
+    }
+
+    .bouton-lien-produit {
+        text-decoration: none;
+        color: white;
+        transition: transform 0.3s ease-in-out;
+        &:hover {
+            transform: scale(0.9);
+            color: #fff;
+        }
+    }
+
+    i  {
+        font-size: 22px!important;
+        display: inline-block!important;
+        // padding:  2px 15px!important;
+        margin:  0 15px;        
+        transition: background-color 0.2s ease-in-out;
+
+        &:hover {
+            background-color: darken($couleur-primaire, 10%)!important;
+            color: #fff!important;
+            font-size: 18px!important;
+        }
+    }
+
+    .formulaire-commande {
+        border-color: lighten($couleur-primaire, 20%)!important;
+        background-color: lighten($couleur-primaire, 30%)!important;
+
+        .confirmation-commande {
+            background-color: darken($couleur-primaire, 10%)!important;
+            color: #fff;
+            padding: 1vw;
+            margin-left: auto;
+            margin-right: auto;  
+        }
+        
+        h2 {
+            background-color: darken($couleur-primaire, 10%)!important;
+            display: inline-block;
+            padding: 0.5rem;
+            font-size: 24px;
+            color: #fff;
+            border-radius: 5px;
+            margin:0 0 1rem 0.25rem;
+        }
+
+        label {
+            color: darken($couleur-primaire, 20%);
+            margin-left: 0.5rem;
+        }
+    }
+
+    /*page confirmation*/
+
+    .paragraph-id-confirmation, .prix-total-confirmation {
+        background-color: darken($couleur-primaire, 20%);
+        // text-align: center;
+        font-size: 20px;
+        padding: 10px;
+    }
+
+    .bloc-confirmation {
+        border-color: lighten($couleur-primaire, 20%)!important;
+    }
+
+    #bouton-vers-boutique {
+        background-color: darken($couleur-primaire, 10%)!important;
+    }
+    #bouton-vers-navigation {
+        background-color: darken($couleur-primaire, 10%)!important;
+    }  
+   
 }
 
-i {
-    display: inline-block;
-    font-size: 26px!important;
-    margin-left: 5px;
+
+/*FOOTER ========================================*/
+
+footer {
+    background: darken($couleur-primaire, 20%)!important;
+    color: #fff;
+    margin-top:100px;
+
+    .container-reseaux-sociaux {
+        border-bottom: 1px solid #FFFFFF;
+    }
+    
+    .reseaux-sociaux {
+        display: inline-block;
+        padding: 30px;
+        color: #fff;
+        transition: transform 0.2s;
+        &:hover {
+            color: #000;
+            padding: 30px;
+            // border-left: 21px solid #fff;
+            // border-right: 1px solid #fff;
+            border-bottom: 1px solid #fff;
+            transform: scale(0.9);
+        }
+    }
+    i {
+        color: #fff;
+        font-size: 20px;
+    }
+
+    a {
+    color: #fff;
+    font-size: 16px;
+    transition: transform 0.3s;
+    &:hover {
+        color: #fff;
+        text-decoration: none;
+      }
+  }
+
+  .copyright {
+      font-size: 14px;
+  }
 }
+  
 
 
-/* Page de confirmation*/
+ 
