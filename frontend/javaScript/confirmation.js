@@ -35,7 +35,7 @@ function allerVersNavigation() {
 
 
 
-    let limiteDeTemps = 3;
+    let limiteDeTemps = 30;
     let compteurTemps = document.getElementById('compteur-temps');
     var decompte = setInterval(compteARebours, 1000);
     
