@@ -1,11 +1,13 @@
 import { sendXHR } from './sendXHR.js';
 import { updatePanierHeader } from './updatePanierHeader.js'
-import { afficherData, animationImageProduit } from './produit_afficher.js'
+import { afficherData } from './produit_afficher.js'
 import { ajouterAuPanier } from './produit_ajouterPanier.js'
 import { capterOptionLentilles, capterNombreArticleChoisi, capterPrixTotal } from './produit_capteurs.js'
 import { creationOptionLentilles, creationOptionQuantite } from './produit_creationOptions.js'
+import { imageAnimation } from './animationImage.js';
 
 let produit_id = window.location.href.match(/[^=]+$/).toString();
+
 
 function controlerButtonAllerPanier() {
     if (localStorage.length == 0 ) {
@@ -28,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
             capterPrixTotal(data.price);
             ajouterAuPanier(data);
         })
-        .then(animationImageProduit)
+        .then(imageAnimation)
         .then(updatePanierHeader)
         .then(controlerButtonAllerPanier);
 });

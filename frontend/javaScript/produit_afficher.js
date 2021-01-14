@@ -50,18 +50,3 @@ export function afficherData(data) {
                         `;
 }
 
-
-
-export function animationImageProduit() {
-
-    let imageProduit = document.querySelector('.hover-image');
-    imageProduit.addEventListener('mouseover', function() {
-        this.style.opacity ='0.75';
-        this.style.scale ='1.1';
-        this.style.transition ='all 350ms';
-    });
-    imageProduit.addEventListener('mouseout', function() {
-        this.style.opacity ='1'
-        this.style.scale ='1'
-    });
-}

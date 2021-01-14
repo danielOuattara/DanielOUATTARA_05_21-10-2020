@@ -1,7 +1,7 @@
 import { requeteFiltration } from './index_filtrationData.js';
-import {sendXHR}  from './sendXHR.js'
-import {updatePanierHeader}  from  './updatePanierHeader.js'
-import {imageAnimation}  from  './index_animationImage.js'
+import {sendXHR}             from './sendXHR.js'
+import {updatePanierHeader}  from './updatePanierHeader.js'
+import {imageAnimation}      from './animationImage.js'
 
 
 // Afficher les articles après reception des data produits
@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
     sendXHR('GET', 'http://localhost:3000/api/cameras')
         .then(infoProduits => afficherVitrine(infoProduits) ,
               errorResponseData => {
-                const error = new Error ("Error in vitrine rendering");
+                const error = new Error ("Erreur dans l'affichage vitrine");
                 error.data = errorResponseData;
                 throw error;
         }).then(imageAnimation);
