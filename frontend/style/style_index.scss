@@ -190,7 +190,17 @@ main {
     #bouton-vers-navigation {
         background-color: darken($couleur-primaire, 10%)!important;
     }  
-   
+
+    /*--page produit--*/
+
+    #confirmation-article-present {
+        position: relative;
+
+        .alert-ajout-article, .alert-actualisation-article { 
+            position: absolute;
+            z-index: 1;
+         }
+    }   
 }
 
 

@@ -17,15 +17,33 @@ export async function updatePanierHeader() {
     document.querySelector('.montant-panier').innerHTML = montantTotalPanier + "€"; 
 
 
+
     // Actualiser la disponibilité du lien vers panier  -----------------------
     let lienHrefPanier = document.querySelector('.lien-vers-panier');
+    
     if(localStorage.length == 0 ) {
        lienHrefPanier.href = "";
        lienHrefPanier.style.cursor = "not-allowed";
     } else {
-        lienHrefPanier.href = './../html/panier.html';
-    }
-
+        switch (location.href) {
+            case ('./produit.html'):
+            lienHrefPanier.href = './html/panier.html';
+            break;
+            case ('./produit.html'):
+            lienHrefPanier.href = './panier.html';
+            break;
+            case ('./produit.html'):
+            lienHrefPanier.href = './panier.html';
+            break;
+        }   
+    } 
 }
+
+
+
+
+
+
+
 
 

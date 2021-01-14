@@ -72,6 +72,7 @@ header .text-accueil {
 /* MAIN ==================*/
 main {
   /*page confirmation*/
+  /*--page produit--*/
 }
 
 main p {
@@ -186,6 +187,15 @@ main #bouton-vers-boutique {
 
 main #bouton-vers-navigation {
   background-color: #6929ce !important;
+}
+
+main #confirmation-article-present {
+  position: relative;
+}
+
+main #confirmation-article-present .alert-ajout-article, main #confirmation-article-present .alert-actualisation-article {
+  position: absolute;
+  z-index: 1;
 }
 
 /*FOOTER ========================================*/

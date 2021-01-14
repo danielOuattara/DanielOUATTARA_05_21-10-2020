@@ -6,35 +6,66 @@ import { creationOptionLentilles, creationOptionQuantite } from './produit_creat
 
 
 export function ajouterAuPanier(data) {
-    let btnAjouterPanier = document.querySelector('.ajoutez-panier');
 
+    let btnAjouterPanier = document.querySelector('.ajoutez-panier');
+    let articleChoisi= [];
+    let articleChoisiKEY;
+    let articleChoisiJSON;
+    let articleName, articleID, articleImageUrl, lentilleChoisie, quantiteChoisie, articlePrix, prixTotal ;
+    let confirmationArticlePresent = document.getElementById('confirmation-article-present');
+
+
+    
     btnAjouterPanier.addEventListener('click', () => {
 
         // capter toutes les données de l'article au "click"
-        let articleName      = document.querySelector('.article-name');
-        let articleID        = data._id;
-        let articleImageUrl  = document.querySelector('.hover-image');
-        let lentilleChoisie  = document.querySelector('.options-lentilles');
-        let quantiteChoisie  = document.querySelector('.quantite-article');
-        let articlePrix      = document.querySelector('.article-prix');
-        let prixTotal        = document.querySelector('#prix-total');
+        articleName      = document.querySelector('.article-name');
+        articleID        = data._id;
+        articleImageUrl  = document.querySelector('.hover-image');
+        lentilleChoisie  = document.querySelector('.options-lentilles');
+        quantiteChoisie  = document.querySelector('.quantite-article');
+        articlePrix      = document.querySelector('.article-prix');
+        prixTotal        = document.querySelector('#prix-total');
 
         // creer un Array qui stocke les données précédentes
-        let articleChoisi = [ 
-                articleName.innerHTML, 
-                articleID, 
-                articleImageUrl.src, 
-                lentilleChoisie.value, 
-                quantiteChoisie.value, 
-                articlePrix.textContent, 
-                prixTotal.textContent
-        ];
+        articleChoisi = [ 
+            articleName.innerHTML, 
+            articleID, 
+            articleImageUrl.src, 
+            lentilleChoisie.value, 
+            quantiteChoisie.value, 
+            articlePrix.textContent, 
+            prixTotal.textContent
+            ];
 
         // créer une clef par choix d'article pour localStorage
-        let articleChoisiKEY = articleName.innerHTML.replace(/\s/, "_")+ "_" + articleID.trim() + "_" + lentilleChoisie.value.replace(/\s/, "_");
+        articleChoisiKEY = articleName.innerHTML.replace(/\s/, "_")+ "_" + articleID.trim() + "_" + lentilleChoisie.value.replace(/\s/, "_");
+
+        if( localStorage.getItem(articleChoisiKEY) !== undefined) {
+            confirmationArticlePresent.innerHTML= 
+                `<div class="alert-actualisation-article alert alert-info alert-dismissible py-2 text-center">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>NOTE : </strong>Article ${articleName.innerHTML} ${lentilleChoisie.value} actualisé et rajouté au panier
+                </div>`
+
+            setTimeout (function() {
+                confirmationArticlePresent.innerHTML = "";
+            }, 2000)
+        }
+
+        if( localStorage.getItem(articleChoisiKEY) == undefined) {
+                confirmationArticlePresent.innerHTML= 
+                `<div class=" alert-ajout-article alert alert-info alert-dismissible py-2 text-center">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>NOTE : </strong>Article ${articleName.innerHTML} ${lentilleChoisie.value} a bien été ajouté au panier
+                </div>`
+            setTimeout (function() {
+                confirmationArticlePresent.innerHTML = "";
+            }, 2000)
+        }
 
         // stocker contenu dans la localStorage
-        let articleChoisiJSON = JSON.stringify(articleChoisi);
+        articleChoisiJSON = JSON.stringify(articleChoisi);
         localStorage.setItem(articleChoisiKEY, articleChoisiJSON);
 
         updatePanierHeader()
