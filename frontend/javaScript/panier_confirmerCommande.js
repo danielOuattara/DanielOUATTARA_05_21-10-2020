@@ -42,7 +42,6 @@ function creerTableauProduct() {
 function capterDataCommande() {
     let prixTotal= 0;
     document.querySelectorAll('.prix-total').forEach(item => prixTotal += parseInt(item.innerHTML))
-    // console.log(prixTotal);
     localStorage.setItem('prix-total', prixTotal);
   }
   

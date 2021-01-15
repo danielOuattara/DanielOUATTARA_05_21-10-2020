@@ -12,12 +12,8 @@ export function ajouterAuPanier(data) {
     let articleChoisiKEY;
     let articleChoisiJSON;
     let articleName, articleID, articleImageUrl, lentilleChoisie, quantiteChoisie, articlePrix, prixTotal ;
-    let confirmationArticlePresent = document.getElementById('confirmation-article-present');
-
-
-    
+  
     btnAjouterPanier.addEventListener('click', () => {
-
         // capter toutes les données de l'article au "click"
         articleName      = document.querySelector('.article-name');
         articleID        = data._id;
@@ -41,29 +37,8 @@ export function ajouterAuPanier(data) {
         // créer une clef par choix d'article pour localStorage
         articleChoisiKEY = articleName.innerHTML.replace(/\s/, "_")+ "_" + articleID.trim() + "_" + lentilleChoisie.value.replace(/\s/, "_");
 
-        if( localStorage.getItem(articleChoisiKEY) !== undefined) {
-            confirmationArticlePresent.innerHTML= 
-                `<div class="alert-actualisation-article alert alert-info alert-dismissible py-2 text-center">
-                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                        <strong>NOTE : </strong>Article ${articleName.innerHTML} ${lentilleChoisie.value} actualisé et rajouté au panier
-                </div>`
-
-            setTimeout (function() {
-                confirmationArticlePresent.innerHTML = "";
-            }, 2000)
-        }
-
-        if( localStorage.getItem(articleChoisiKEY) == undefined) {
-                confirmationArticlePresent.innerHTML= 
-                `<div class=" alert-ajout-article alert alert-info alert-dismissible py-2 text-center">
-                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                        <strong>NOTE : </strong>Article ${articleName.innerHTML} ${lentilleChoisie.value} a bien été ajouté au panier
-                </div>`
-            setTimeout (function() {
-                confirmationArticlePresent.innerHTML = "";
-            }, 2000)
-        }
-
+        afficherConfirmation(articleChoisiKEY);
+        
         // stocker contenu dans la localStorage
         articleChoisiJSON = JSON.stringify(articleChoisi);
         localStorage.setItem(articleChoisiKEY, articleChoisiJSON);
@@ -77,4 +52,32 @@ export function ajouterAuPanier(data) {
         capterPrixTotal(data.price)
         ajouterAuPanier(data);
     });
+}
+
+
+
+function afficherConfirmation(arg) {
+    let confirmationArticlePresent = document.getElementById('confirmation-article-present');
+    let articleName      = document.querySelector('.article-name');
+    let lentilleChoisie  = document.querySelector('.options-lentilles');
+
+    if( localStorage.getItem(arg) !== undefined) {
+        confirmationArticlePresent.innerHTML= 
+            `<div class="alert-actualisation-article alert alert-info py-2 text-center">
+                    <strong> ${articleName.innerHTML} ${lentilleChoisie.value} : </strong> actualisé au panier
+            </div>`
+        setTimeout (function() {
+            confirmationArticlePresent.innerHTML = "";
+        }, 1500)
+    }
+
+    if( localStorage.getItem(arg) == undefined) {
+            confirmationArticlePresent.innerHTML= 
+            `<div class=" alert-ajout-article alert alert-info py-2 text-center">
+                    <strong> ${articleName.innerHTML} ${lentilleChoisie.value} : </strong> ajouté au panier
+            </div>`
+        setTimeout (function() {
+            confirmationArticlePresent.innerHTML = "";
+        }, 1500)
+    }
 }
