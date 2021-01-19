@@ -1,6 +1,7 @@
  import {updatePanierHeader} from './updatePanierHeader.js'
- import {sendXHR} from './sendXHR.js'
- import {afficherVitrine} from './index.js'
+ import {sendXHR}            from './sendXHR.js'
+ import {afficherVitrine}    from './index.js'
+ import {imageAnimation}     from './animationImage.js'
  
  // Filtrer des articles affichés.
 //  let optionFiltre = document.querySelector('#filtre');
